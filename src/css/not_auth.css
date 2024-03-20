@@ -1,0 +1,19 @@
+.message-auth {
+  display: flex;
+
+  margin-top: 5rem;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.message-title {
+  font-size: 4rem;
+  font-weight: 700;
+  flex-wrap: wrap;
+}
+
+.message-description {
+  font-size: 1rem;
+  flex-wrap: wrap;
+}
