@@ -7,6 +7,7 @@ router.use(cookieParser());
 
 router.get("/", HomeController.getLanding);
 router.post("/entrar", HomeController.tryLogin);
+router.get("/home", HomeController.getHome);
 router.get("/pdv", HomeController.getPDV);
 
 module.exports = router;

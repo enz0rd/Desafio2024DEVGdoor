@@ -1,11 +1,12 @@
 const db = require("../models");
-const sequelize = require("sequelize");
-const cookieParser = require("cookie-parser");
-const sessions = require("express-session");
-const { resourceLimits } = require("worker_threads");
-const { json } = require("express");
-const moment = require("moment");
+// const sequelize = require("sequelize");
+// const cookieParser = require("cookie-parser");
+// const sessions = require("express-session");
+// const { resourceLimits } = require("worker_threads");
+// const { json } = require("express");
+// const moment = require("moment");
 const path = require("path");
+const checkCookies = require("./Auth.js");
 
 class HomeController {
   static async getLanding(req, res) {
@@ -37,7 +38,7 @@ class HomeController {
           res.cookie("sessionId", sessionId, { value: true, maxAge: 3600000 });
           res.cookie("expirationTime", expirationTime, { maxAge });
           console.log(`Redirecting`);
-          res.redirect("/pdv");
+          res.redirect("/home");
         } catch (error) {
           console.log(`Erro ao listar: ${error.message}`);
           const error_message = [];
@@ -61,6 +62,21 @@ class HomeController {
     }
   }
 
+  static async getHome(req, res) {
+    var check = await checkCookies(req, res);
+    if (check === true) {
+      res.sendFile(path.join(__dirname, "../src/views", "home.html"));
+    } else {
+      var error = [
+        {
+          title: "Não autorizado",
+          message: "Retornando ao login",
+        },
+      ];
+      res.render("../src/views/not_auth", { data: error });
+    }
+  }
+
   static async getPDV(req, res) {
     var check = await checkCookies(req, res);
     if (check === true) {
@@ -74,41 +90,6 @@ class HomeController {
       ];
       res.render("../src/views/not_auth", { data: error });
     }
-  }
-}
-
-async function checkCookies(req, res) {
-  try {
-    const sessionId = req.cookies.sessionId;
-    const maxAge = req.cookies.expirationTime;
-    if (sessionId == null || maxAge == null) {
-      console.log(`Não autorizado`);
-      return false;
-    } else {
-      var result = await db.USUARIOS.findOne({
-        where: { nome: atob(sessionId) },
-      });
-      try {
-        if (result) {
-          if (maxAge < Date.now()) {
-            console.log(`Não autorizado`);
-            return false;
-          } else {
-            console.log(`${sessionId} Autorizado`);
-            return true;
-          }
-        } else {
-          console.log(`Não autorizado`);
-          return false;
-        }
-      } catch (error) {
-        console.log(`Erro ao listar: ${error.message}`);
-        return false;
-      }
-    }
-  } catch (error) {
-    console.log(`Erro ao listar: ${error.message}`);
-    return false;
   }
 }
 

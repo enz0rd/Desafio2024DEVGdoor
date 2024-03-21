@@ -43,7 +43,7 @@ document
                 alert(jsonResponse.message);
               }
             } else {
-              window.location.href = "/pdv";
+              window.location.href = "/home";
               // A resposta não é um JSON válido, exibir mensagem genérica
             }
           } else {

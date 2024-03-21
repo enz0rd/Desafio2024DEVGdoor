@@ -1,0 +1,24 @@
+.inicio {
+  width: 100%;
+  padding-top: 10rem;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.barra-fim {
+  padding-bottom: 1rem;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.menu-items {
+  background-size: 100%;
+  background-color: white;
+}
