@@ -24,6 +24,10 @@ module.exports = {
         type: Sequelize.FLOAT,
         defaultValue: 0.0,
       },
+      ativo: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: true,
+      },
     });
   },
 

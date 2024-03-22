@@ -25,6 +25,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
       },
+      ativo: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: true,
+      },
     });
   },
 

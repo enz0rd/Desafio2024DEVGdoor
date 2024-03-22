@@ -1,10 +1,4 @@
 const db = require("../models");
-// const sequelize = require("sequelize");
-// const cookieParser = require("cookie-parser");
-// const sessions = require("express-session");
-// const { resourceLimits } = require("worker_threads");
-// const { json } = require("express");
-// const moment = require("moment");
 const path = require("path");
 const checkCookies = require("./Auth.js");
 
