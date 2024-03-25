@@ -1,5 +1,5 @@
 document
-  .getElementById("login-form")
+  .getElementById("cadastro-user")
   .addEventListener("submit", function (event) {
     event.preventDefault(); // Impede o envio do formulário padrão
     function verificarCamposPreenchidos(form) {
@@ -14,21 +14,30 @@ document
       return true; // Retorna verdadeiro se todos os campos estiverem preenchidos
     }
 
-    var form = document.getElementById("login-form");
+    var form = document.getElementById("cadastro-user");
     var camposPreenchidos = verificarCamposPreenchidos(form);
 
     if (camposPreenchidos) {
       var form = event.target;
       var user = form.querySelector("input[type='text']").value;
       var password = form.querySelector("input[type='password']").value;
+      var checkAtivo = form.querySelector("input[type='checkbox']");
+
+      if (checkAtivo.checked === true) {
+        ativo = true;
+      } else {
+        ativo = false;
+      }
 
       var data = {
-        user: `${user}`,
+        nome: `${user}`,
         password: `${password}`,
+        ativo: ativo,
+        updated: `${new Date()}`,
       };
 
       var xhr = new XMLHttpRequest();
-      xhr.open("POST", form.action, true);
+      xhr.open("post", form.action, true);
       xhr.setRequestHeader("Content-Type", "application/json");
       xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
@@ -38,12 +47,13 @@ document
             if (contentType && contentType.includes("application/json")) {
               // A resposta é JSON válido
               var jsonResponse = JSON.parse(xhr.responseText);
-              if (jsonResponse.message) {
+              if (jsonResponse.codigo == 400) {
                 // Exibir mensagem de erro
                 alert(jsonResponse.message);
               }
             } else {
-              window.location.href = "/home";
+              alert("Usuário atualizado!");
+              window.location.href = "/usuarios";
               // A resposta não é um JSON válido, exibir mensagem genérica
             }
           } else {
@@ -56,6 +66,6 @@ document
     } else {
       var user = form.querySelector("input[type='text']").value;
       var password = form.querySelector("input[type='password']").value;
-      alert("Preencha os campos!");
+      alert("Nenhum campo pode ficar vazio!");
     }
   });

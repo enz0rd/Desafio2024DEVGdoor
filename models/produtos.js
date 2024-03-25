@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
       descricao: DataTypes.STRING,
       valor_venda: DataTypes.FLOAT,
       qtd: DataTypes.FLOAT,
+      ativo: DataTypes.BOOLEAN,
     },
     {
       sequelize,

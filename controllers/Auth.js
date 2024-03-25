@@ -9,7 +9,7 @@ async function checkCookies(req, res) {
       return false;
     } else {
       var result = await db.USUARIOS.findOne({
-        where: { nome: atob(sessionId) },
+        where: { nome: atob(sessionId), ativo: 1 },
       });
       try {
         if (result) {

@@ -22,6 +22,7 @@ class HomeController {
         where: {
           nome: req.body.user,
           password: req.body.password,
+          ativo: 1
         },
       });
       if (resp != null) {
@@ -43,7 +44,7 @@ class HomeController {
           res.render("../src/views/not_auth", { data: error_message });
         }
       } else {
-        res.send({ message: "Credenciais inválidas" });
+        res.send({ message: "As credenciais estão inválidas ou o usuário foi inativado" });
       }
     } catch (error) {
       console.log(`Erro ao listar: ${error.message}`);

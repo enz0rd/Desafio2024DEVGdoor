@@ -37,6 +37,7 @@
             <li><a href="/vendas">Vendas</a></li>
             <li><a href="/produtos">Produtos</a></li>
             <li><a href="/usuarios">Usuários</a></li>
+            <li><a href="/logout">Logout</a></li>
           </div>
         </div>
       </div>
@@ -49,10 +50,16 @@
         <a class="list-group-item list-group-item-action active"> Usuários </a>
         <% for(var i=0; i < data.length; i++) { %>
         <a
-          href="/usuarios/<%= data[i].id %>"
-          class="list-group-item list-group-item-action"
-          ><%= data[i].nome %></a
-        >
+          href="/usuario/<%= data[i].id %>"
+          class="list-group-item list-group-item-action d-flex justify-content-between">
+          <% if(data[i].ativo === true) { %>
+            <%= data[i].nome %>
+            <% } else { %> 
+              <%= data[i].nome + " - Inativo!" %> 
+              <div class="componentes-lista">❌</div>
+              <% } %>
+                
+            </a>
         <% }; %>
       </div>
       <div class="botoes">

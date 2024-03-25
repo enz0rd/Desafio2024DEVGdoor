@@ -16,7 +16,9 @@
     ></script>
     <link rel="stylesheet" href="../src/css/navbar.css" />
     <link rel="stylesheet" href="../src/css/inicio.css" />
-    <title>Produtos - PDV Gdoor</title>
+    <link rel="stylesheet" href="../src/css/cadastro.css" />
+    <script src="../src/js/cadastro_user.js" defer></script>
+    <title>Cadastrar Usuário - PDV Gdoor</title>
   </head>
   <body>
     <nav>
@@ -42,8 +44,31 @@
         </div>
       </div>
     </nav>
-
-    <div class="barra-fim fixed-bottom">
+    <div class="container" style="margin: auto">
+      <form id="cadastro-user" method="post" action="/usuarios/cadastrar">
+        <div class="form-group">
+          <label for="user">Usuário</label>
+          <input
+            type="text"
+            class="form-control"
+            id="user"
+            placeholder="Insira o usuário"
+          />
+        </div>
+        <div class="form-group">
+          <label for="password">Senha</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            placeholder="Senha"
+          />
+        </div>
+        <br />
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+      </form>
+    </div>
+    <div class="barra-fim fixed-bottom" style="z-index: 2">
       <span class="meu-nome">Enzo Rossi Daltoé - 2024</span>
     </div>
   </body>

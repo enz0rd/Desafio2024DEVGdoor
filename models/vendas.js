@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
       DATA_EMISSAO: DataTypes.DATE,
       STATUS: DataTypes.STRING,
       valor_tot: DataTypes.FLOAT,
-      operador: DataTypes.INTEGER,
+      id_operador: DataTypes.INTEGER,
     },
     {
       sequelize,

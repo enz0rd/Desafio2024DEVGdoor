@@ -1,5 +1,5 @@
 document
-  .getElementById("login-form")
+  .getElementById("cadastro-user")
   .addEventListener("submit", function (event) {
     event.preventDefault(); // Impede o envio do formulário padrão
     function verificarCamposPreenchidos(form) {
@@ -14,7 +14,7 @@ document
       return true; // Retorna verdadeiro se todos os campos estiverem preenchidos
     }
 
-    var form = document.getElementById("login-form");
+    var form = document.getElementById("cadastro-user");
     var camposPreenchidos = verificarCamposPreenchidos(form);
 
     if (camposPreenchidos) {
@@ -23,7 +23,7 @@ document
       var password = form.querySelector("input[type='password']").value;
 
       var data = {
-        user: `${user}`,
+        nome: `${user}`,
         password: `${password}`,
       };
 
@@ -38,12 +38,12 @@ document
             if (contentType && contentType.includes("application/json")) {
               // A resposta é JSON válido
               var jsonResponse = JSON.parse(xhr.responseText);
-              if (jsonResponse.message) {
+              if (jsonResponse.codigo == 400) {
                 // Exibir mensagem de erro
                 alert(jsonResponse.message);
               }
             } else {
-              window.location.href = "/home";
+              window.location.href = "/usuarios";
               // A resposta não é um JSON válido, exibir mensagem genérica
             }
           } else {
