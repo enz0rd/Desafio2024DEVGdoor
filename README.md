@@ -23,3 +23,15 @@ Para começarmos, rode os seguintes comandos:
   <small>Para iniciar o servidor via Nodemon</small>
 
 Espero que goste!
+
+Changelogs:
+
+[X] Tela de login e autenticação
+[] CRUD de Usuários (75%)
+[] CRUD de Produtos
+[] Envio de vendas
+[] Listagem de Vendas
+
+Planos futuros
+
+[] Implementação de um módulo de relatórios
