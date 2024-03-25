@@ -2,11 +2,13 @@ Bem vindo ao
 
 # Repositório do desafio DEV 2024 da Gdoor Zucchetti
 
-Para começarmos, rode os seguintes comandos:
+Para começarmos, tenha o XAMPP instalado, depois disso rode os seguintes comandos:
 
 - `npm install`
 
   <small>Para instalar as dependências</small>
+
+Abra o XAMPP e inicie os serviços de MySQL e Apache. Depois:
 
 - `npx sequelize-cli db:create`
 
