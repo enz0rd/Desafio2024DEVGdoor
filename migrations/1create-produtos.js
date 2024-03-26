@@ -16,17 +16,32 @@ module.exports = {
       descricao: {
         type: Sequelize.STRING,
       },
-      valor_venda: {
-        type: Sequelize.FLOAT,
-        defaultValue: 0.0,
-      },
       qtd: {
         type: Sequelize.FLOAT,
         defaultValue: 0.0,
       },
+      valor_custo: {
+        type: Sequelize.FLOAT,
+        defaultValue: 0.0,
+      },
+      valor_venda: {
+        type: Sequelize.FLOAT,
+        defaultValue: 0.0,
+      },
+      observacoes: {
+        type: Sequelize.STRING,
+      },
       ativo: {
         type: Sequelize.BOOLEAN,
         defaultValue: true,
+      },
+      createdAt: {
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
+      },
+      updatedAt: {
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
     });
   },

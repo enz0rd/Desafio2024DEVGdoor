@@ -19,9 +19,13 @@ module.exports = (sequelize, DataTypes) => {
     {
       barras: DataTypes.STRING,
       descricao: DataTypes.STRING,
+      valor_custo: DataTypes.FLOAT,
       valor_venda: DataTypes.FLOAT,
+      observacoes: DataTypes.STRING,
       qtd: DataTypes.FLOAT,
       ativo: DataTypes.BOOLEAN,
+      createdAt: DataTypes.DATE,
+      updatedAt: DataTypes.DATE,
     },
     {
       sequelize,

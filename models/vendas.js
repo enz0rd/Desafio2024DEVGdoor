@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       VENDAS.belongsTo(models.USUARIOS, {
-        foreignKey: "operador",
+        foreignKey: "id_operador",
         as: "vendasOperador",
       });
 
@@ -22,11 +22,18 @@ module.exports = (sequelize, DataTypes) => {
   }
   VENDAS.init(
     {
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false
+      }, 
       NUMERO: DataTypes.INTEGER,
       DATA_EMISSAO: DataTypes.DATE,
       STATUS: DataTypes.STRING,
       valor_tot: DataTypes.FLOAT,
       id_operador: DataTypes.INTEGER,
+      cancelada: DataTypes.BOOLEAN,
     },
     {
       sequelize,

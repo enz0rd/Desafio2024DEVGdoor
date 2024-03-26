@@ -109,7 +109,7 @@
         <% if(data.currentUser === true) { %> disabled=true <% } else { %> <% } %> 
         id="excluir" 
         onclick="ExcluirUser()" 
-        class="btn btn-danger">
+        class="btn btn-outline-danger">
           Excluir
         </button>
       </form>
@@ -119,6 +119,7 @@
     </div>
     <script>
         var idUser = "<%= data.id %>";
+        var currentUser = "<%= data.currentUser %>";
     </script>
     <script src="../src/js/excluir_user.js"></script>
   </body>

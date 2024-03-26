@@ -49,7 +49,7 @@ class UsuarioController {
       }
 
       const sessionId = req.cookies.sessionId;
-      if(jsonParse.nome == atob(sessionId)) {
+      if(jsonParse.nome.toUpperCase() == atob(sessionId).toUpperCase()) {
         jsonParse['currentUser'] = true;
       } else {
         jsonParse['currentUser'] = false;
@@ -126,22 +126,22 @@ class UsuarioController {
         });
         const vendas = await db.VENDAS.findAll({
           where: {
-            id_operador: req.body.id,
+            id_operador: req.body.id_user,
           },
         });
 
-        if (vendas) {
+        console.log(vendas.length);
+        if (vendas == []) {
           await resp.set({
             ativo: false,
           });
           await resp.save();
-          res.redirect("/usuarios");
         } else {
           await resp.destroy();
-          res.redirect("/usuarios");
         }
+        res.status(200).json({message: `Usuário excluído com sucesso.` });
       } catch (err) {
-        res.send({ codigo: 400, message: `Ocorreu um erro: ${err.message}` });
+        res.status(400).json({message: `Ocorreu um erro: ${err.message}` });
       }
     } else {
       var error = [
@@ -170,6 +170,7 @@ class UsuarioController {
             nome: req.body.nome,
             password: req.body.password,
             createdAt: new Date(),
+            ativo: true,
           });
           res.redirect("/usuarios");
         }

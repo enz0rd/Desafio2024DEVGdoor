@@ -14,8 +14,11 @@
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
     <link rel="stylesheet" href="../src/css/navbar.css" />
     <link rel="stylesheet" href="../src/css/inicio.css" />
+    <link rel="stylesheet" href="../src/css/produtos.css" />
     <title>Produtos - PDV Gdoor</title>
   </head>
   <body>
@@ -42,9 +45,40 @@
         </div>
       </div>
     </nav>
-
+    <div class="container" style="margin: auto">
+      <div class="barracima">
+        <h1 class="form-title">Produtos</h1>
+        <a href="/produtos/cadastrar" class="btn btn-primary">Cadastrar novo</a>
+      </div>
+    </div>
+    <div class="scrollable-table">
+      <table id="tab_produtos" class="table table-hover table-bordered results">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th class="col-md-2 col-xs-2">Cód. Barras</th>
+            <th class="col-md-5 col-xs-5">Descrição</th>
+            <th class="col-md-1 col-xs-1">QTD</th>
+            <th class="col-md-2 col-xs-4">Valor de Venda</th>
+            <th class="col-md-2 col-xs-4">Valor Custo</th>
+          </tr>
+          <tr class="warning no-result">
+            <td colspan="5"><i class="fa fa-warning"></i> Nenhum resultado encontrado</td>
+          </tr>
+        </thead>
+        <tbody id="table-body">
+          
+        </tbody>
+      </table>
+    </div>
     <div class="barra-fim fixed-bottom">
       <span class="meu-nome">Enzo Rossi Daltoé - 2024</span>
     </div>
+    <script>
+      var produtos = <%- JSON.stringify(data) %>;
+    </script>
+    <script src="https://cdn.datatables.net/plug-ins/1.11.5/i18n/Portuguese-Brasil.json"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <script src="../src/js/produtos.js"></script>
   </body>
 </html>
