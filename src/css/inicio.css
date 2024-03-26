@@ -22,3 +22,19 @@
   background-size: 100%;
   background-color: white;
 }
+
+code {
+  font-size: 1rem;
+  padding: .3rem .5rem .3rem .5rem;
+  border: 1px solid #c7c7c7;
+  border-radius: .3rem;
+}
+
+.atalhos {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}

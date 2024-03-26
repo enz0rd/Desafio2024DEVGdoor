@@ -16,20 +16,6 @@
   display: table-row;
 }
 
-.counter {
-  padding: 8px;
-  color: #ccc;
-}
-
-.form-group {
-    width: 80%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: row;
-    margin: auto;
-}
-
 #tab_produtos {
     width: 100%;
     border-collapse: collapse;
@@ -57,15 +43,11 @@
     overflow-x: auto;
 }
 
-.contador {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: row;
-    margin: auto;
-}
-
 .results thead th,
 .results tbody td {
     white-space: nowrap; /* Evita que o texto quebre em várias linhas */
+}
+
+#cadastro-produto {
+    margin-top: 5rem;
 }

@@ -17,8 +17,8 @@
     <link rel="stylesheet" href="../src/css/navbar.css" />
     <link rel="stylesheet" href="../src/css/inicio.css">
     <link rel="stylesheet" href="../src/css/cadastro.css" />
-    <script src="../src/js/cadastro_user.js" defer></script>
-    <title>Cadastrar Usuário - PDV Gdoor</title>
+    <script src="../src/js/cadastro_produto.js" defer></script>
+    <title>Cadastrar Produto - PDV Gdoor</title>
   </head>
   <body>
     <nav>
@@ -44,8 +44,8 @@
         </div>
       </div>
     </nav>
-    <div class="container" style="margin: auto">
-      <form id="cadastro-user" method="post" action="/usuarios/cadastrar">
+    <div class="container mt-5" style="margin: auto">
+      <form id="cadastro-produto" method="post" action="/produtos/cadastrar">
         <h1 class="form-title">Novo produto:</h1>
         <div class="form-row mb-3 d-flex justify-content-between flex-wrap">
           <div class="form-group col-md-2 m-1">
@@ -54,7 +54,7 @@
           </div>
           <div class="form-group col-md-4 m-1">
             <label for="barras">Barras</label>
-            <input type="text" class="form-control" id="barras" placeholder="EAN13">
+            <input type="text" class="form-control" id="barras" maxlength="13" placeholder="EAN13">
           </div>
         </div>
         <div class="form-group m-1">
@@ -64,15 +64,15 @@
         <div class="form-row d-flex justify-content-between flex-wrap">
           <div class="form-group col-md-3 m-1">
             <label for="qtd">Quantidade</label>
-            <input type="number" step="any" class="form-control" id="qtd'" placeholder="0,00">
+            <input type="number" step="any" class="form-control" id="qtd" placeholder="0,00">
           </div>
           <div class="form-group col-md-3 m-1">
             <label for="valor_custo">Preço de custo</label>
-            <input type="number" step="any" class="form-control" id="valor_custo'" placeholder="R$0,00">
+            <input type="number" step="any" class="form-control" id="valorcusto" placeholder="R$0,00">
           </div>
           <div class="form-group col-md-3 m-1">
             <label for="valor_venda">Preço de Venda</label>
-            <input type="number" step="any" class="form-control" id="valor_venda'" placeholder="R$0,00">
+            <input type="number" step="any" class="form-control" id="valorvenda" placeholder="R$0,00">
           </div>
         </div>
         <div class="form-group m-1">

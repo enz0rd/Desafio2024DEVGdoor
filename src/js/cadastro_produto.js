@@ -6,9 +6,9 @@ document
     var form = event.target;
     var barras = form.querySelector("#barras").value;
     var descricao = form.querySelector("#descricao").value;
-    var qtd = 0; // Atribua o valor correto conforme necessário
-    var valor_custo = parseFloat(form.querySelector("#valor_custo").value);
-    var valor_venda = parseFloat(form.querySelector("#valor_venda").value);
+    var qtd = parseFloat(form.querySelector("#qtd").value);
+    var valor_custo = parseFloat(form.querySelector("#valorcusto").value);
+    var valor_venda = parseFloat(form.querySelector("#valorvenda").value);
     var observacoes = form.querySelector("#observacoes").value;
 
     function verificarCamposPreenchidos(form) {
@@ -49,7 +49,7 @@ document
                 alert(jsonResponse.message);
               }
             } else {
-              window.location.href = "/usuarios";
+              window.location.href = "/produtos";
               // A resposta não é um JSON válido, exibir mensagem genérica
             }
           } else {
@@ -60,6 +60,6 @@ document
       };
       xhr.send(JSON.stringify(data));
     } else {
-      alert("Os campos Descrição, valor de custo, valor de venda e quantidade não podem estar em branco!");
+      alert("Os campos descrição, valor de custo, valor de venda e quantidade não podem estar em branco!");
     }
   });

@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(document).ready(function() {
     var table = $('#tab_produtos').DataTable({
         "language": {
             "sEmptyTable": "Nenhum registro encontrado",
@@ -22,32 +22,25 @@ $(document).ready(function () {
                 "sSortAscending": ": Ordenar colunas de forma ascendente",
                 "sSortDescending": ": Ordenar colunas de forma descendente"
             }
-        },
-        "lengthMenu": [10, 25, 50, 100] // Opções de quantidade de registros por página
+        }
     });
 
-    // Adicionar linhas à DataTable
     produtos.forEach(function(produto) {
-        var valorVenda = produto.valor_venda ? 'R$' + produto.valor_venda : '';
-        var valorCusto = produto.valor_custo ? 'R$' + produto.valor_custo : '';
+        var valorVenda = produto.valor_venda ? 'R$' + produto.valor_venda.toFixed(2) : '';
+        var valorCusto = produto.valor_custo ? 'R$' + produto.valor_custo.toFixed(2) : '';
 
-        table.row.add([
+        var rowNode = table.row.add([
             produto.id,
             produto.barras || '',
             produto.descricao || '-',
-            produto.estoque || '',
+            produto.qtd || '',
             valorVenda,
-            valorCusto
-        ]).draw();
+            valorCusto // Adicionando valor de custo à linha da tabela
+        ]).draw().node();
 
-         // Adicionar ID do produto como classe à linha
-         $(rowNode).addClass('produto-id-' + produto.id);
-
-         // Adicionar evento de clique à linha para redirecionar para a página do produto
-         $(rowNode).on('click', function() {
-             var idProduto = $(this).attr('class').match(/produto-id-(\d+)/)[1];
-             window.location.href = '/produto/' + idProduto;
-         });
+        $(rowNode).on('click', function() {
+            var idProduto = produto.id;
+            window.location.href = '/produto/' + idProduto;
+        });
     });
-
 });
