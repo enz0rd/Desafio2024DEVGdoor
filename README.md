@@ -29,8 +29,8 @@ Espero que goste!
 Changelogs:
 
 - [X] Tela de login e autenticação
-- [ ] CRUD de Usuários (75%)
-- [ ] CRUD de Produtos
+- [X] CRUD de Usuários
+- [ ] CRUD de Produtos (10%)
 - [ ] Envio de vendas
 - [ ] Listagem de Vendas
 
