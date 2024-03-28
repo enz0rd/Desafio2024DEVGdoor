@@ -1,6 +1,7 @@
 const express = require("express");
 const routes = require("./routes/index");
 const cookieParser = require("cookie-parser");
+const favicon = require("serve-favicon");
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.listen(port, () => {
   console.log(`Server rodando em:
     http://localhost:${port}/`);
   app.use(express.static(__dirname));
+  app.use(favicon(__dirname + '/src/assets/favicon.ico'))
   app.use(function (req, res, next) {
     res.status(404);
 

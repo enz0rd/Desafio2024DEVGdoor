@@ -30,7 +30,7 @@ Changelogs:
 
 - [X] Tela de login e autenticação
 - [X] CRUD de Usuários
-- [ ] CRUD de Produtos (10%)
+- [X] CRUD de Produtos
 - [ ] Envio de vendas
 - [ ] Listagem de Vendas
 
