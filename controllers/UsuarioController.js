@@ -132,12 +132,12 @@ class UsuarioController {
 
         console.log(vendas.length);
         if (vendas == []) {
+          await resp.destroy();
+        } else {
           await resp.set({
             ativo: false,
           });
           await resp.save();
-        } else {
-          await resp.destroy();
         }
         res.status(200).json({message: `Usuário excluído com sucesso.` });
       } catch (err) {

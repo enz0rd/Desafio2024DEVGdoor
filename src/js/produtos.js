@@ -38,9 +38,13 @@ $(document).ready(function() {
             valorCusto // Adicionando valor de custo à linha da tabela
         ]).draw().node();
 
+        if (!produto.ativo) {
+            $(rowNode).addClass('inativo'); // Adiciona a classe 'inativo' se o produto não estiver ativo
+        }
+
         $(rowNode).on('click', function() {
             var idProduto = produto.id;
-            window.location.href = '/produto/' + idProduto;
+            window.location.href = '/produtos/' + idProduto;
         });
     });
 });

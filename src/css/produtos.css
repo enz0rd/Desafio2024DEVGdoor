@@ -7,6 +7,10 @@
   flex-direction: row;
 }
 
+.inativo td {
+  color: red;
+}
+
 .results tr[visible="false"],
 .no-result {
   display: none;
@@ -41,6 +45,7 @@
     width: 80%;
     margin: auto;
     overflow-x: auto;
+    margin-bottom: 5rem;
 }
 
 .results thead th,
