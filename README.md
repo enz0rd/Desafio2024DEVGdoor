@@ -31,7 +31,7 @@ Changelogs:
 - [X] Tela de login e autenticação
 - [X] CRUD de Usuários
 - [X] CRUD de Produtos
-- [ ] Envio de vendas
+- [ ] Envio de vendas (50%)
 - [ ] Listagem de Vendas
 
 Planos futuros
