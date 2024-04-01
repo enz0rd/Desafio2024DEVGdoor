@@ -17,6 +17,11 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "codigo_venda",
         as: "venda",
       });
+      
+      VENDAS.hasMany(models.PAGVENDAS, {
+        foreignKey: "codigo_venda",
+        as: "pag_venda",
+      });
       // define association here
     }
   }

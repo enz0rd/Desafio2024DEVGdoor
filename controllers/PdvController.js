@@ -14,6 +14,7 @@ class PdvController {
             id: {
               [db.Sequelize.Op.like]: `%${query}%`,
             },
+            ativo: 1,
           },
           limit: 5,
         });
@@ -23,6 +24,7 @@ class PdvController {
             barras: {
               [db.Sequelize.Op.like]: `%${query}%`,
             },
+            ativo: 1,
           },
           limit: 5,
         });
@@ -32,6 +34,7 @@ class PdvController {
             descricao: {
               [db.Sequelize.Op.like]: `%${query}%`,
             },
+            ativo: 1,
           },
           limit: 5,
         });
