@@ -9,8 +9,8 @@ class HomeController {
     } catch (error) {
       const error_message = [];
       error_message.push({
-        title: "Error",
-        message: error.message + " Returning to login",
+        title: "Erro",
+        message: error.message + " Retornando ao login",
       });
       res.render("../src/views/not_auth", { data: error_message });
     }
@@ -38,7 +38,7 @@ class HomeController {
           console.log(`Erro ao listar: ${error.message}`);
           const error_message = [];
           error_message.push({
-            title: "Error",
+            title: "Erro",
             message: error.message,
           });
           res.render("../src/views/not_auth", { data: error_message });
@@ -50,7 +50,7 @@ class HomeController {
       console.log(`Erro ao listar: ${error.message}`);
       const error_message = [];
       error_message.push({
-        title: "Error",
+        title: "Erro",
         message: error.message,
       });
       res.render("../src/views/not_auth", { data: error_message });

@@ -8,5 +8,8 @@ document.addEventListener("keyup", (e) => {
   } else if (e.key === "u") {
     e.preventDefault();
     window.location.href = "/usuarios";
+  } else if (e.key === "n") {
+    e.preventDefault();
+    window.location.href = "/pdv";
   }
 });

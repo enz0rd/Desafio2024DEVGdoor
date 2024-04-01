@@ -15,8 +15,10 @@
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="../src/css/navbar.css" />
     <link rel="stylesheet" href="../src/css/inicio.css" />
+    <link rel="stylesheet" href="../src/css/pdv.css" />
     <title>Venda - PDV Gdoor</title>
   </head>
   <body>
@@ -43,9 +45,64 @@
         </div>
       </div>
     </nav>
-
+    <div class="form-venda mt-5 container">
+      <h1>Nova venda</h1>
+      <div class="barra-cima">
+        <label for="searchTerm">Pesquisar produtos</label>
+        <div class="input-group">
+          <input type="text" id="searchTerm" class="form-control" placeholder="Digite o termo de pesquisa" aria-label="Pesquisar" aria-describedby="button-addon2">
+          <ul class="z-2 dropdown-menu d-flex flex-column mt-5 d-none w-100" id="searchDropdown">
+          </ul>
+        </div>
+        <div class="listagem-venda mt-5">
+          <div class="scrollable-table">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Produto</th>
+                  <th scope="col">Preço</th>
+                  <th scope="col">QTD</th>
+                  <th scope="col">Total</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody id="vendaTable">
+              </tbody>
+            </table>
+          </div>
+          <div class="total-venda">
+            <h4>Total: R$ <span id="total">0,00</span></h4>
+            <button class="btn btn-primary" onclick="finalizar()">Finalizar</button>
+          </div>
+        </div>
+      </div>
+      <!-- popup produto -->
+      <div class="modal fade" id="produtoModal" tabindex="-1" aria-labelledby="produtoModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="produtoModalLabel">Detalhes do Produto #<small id="modalCodigo"></small></h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <h2 id="modalDescricao"></h2>
+              <p id="modalPreco"></p>
+              <p id="modalQtd"></p>
+              <input type="number" id="quantidade" class="form-control" placeholder="Quantidade" min="1" required>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" onclick="lançar()">Lançar</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Descartar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="listagem-produtos"></div>
+    </div>
     <div class="barra-fim fixed-bottom">
       <span class="meu-nome">Enzo Rossi Daltoé - 2024</span>
     </div>
+    <script src="../src/js/pdv.js"></script>
   </body>
 </html>
