@@ -73,7 +73,7 @@
           </div>
           <div class="total-venda">
             <h4>Total: R$ <span id="total">0,00</span></h4>
-            <button class="btn btn-primary" onclick="finalizar()">Finalizar</button>
+            <button class="btn btn-primary" onclick="openPagamentos()">Pagamentos</button>
           </div>
         </div>
       </div>
@@ -94,6 +94,38 @@
             <div class="modal-footer">
               <button type="button" class="btn btn-primary" onclick="lançar()">Lançar</button>
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Descartar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- popup pagamentos -->
+      <div class="modal fade" id="pagamentosModal" tabindex="-1" aria-labelledby="pagamentosModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="produtoModalLabel">Pagamentos da venda</small></h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <small>Total:</small>
+              <p id="modalTotal"></p>
+              <small>Falta Pagar:</small>
+              <p id="faltaPagar"></p>
+              <small>Troco:</small>
+              <p id="troco"></p>
+              <small>Formas de Pagamento</small><br>
+              <label for="dinheiro">Dinheiro:</label>
+              <input type="number" id="dinheiro" class="form-control pagamento" placeholder="0.00" min="0.00" required>
+              <label for="cartao-debito">Cartão Débito:</label>
+              <input type="number" id="cartaodebito" class="form-control pagamento" placeholder="0.00" min="0.00" required>
+              <label for="cartao-credito">Cartão Crédito:</label>
+              <input type="number" id="cartaocredito" class="form-control pagamento" placeholder="0.00" min="0.00" required>
+              <label for="pix">PIX:</label>
+              <input type="number" id="pix" class="form-control pagamento" placeholder="0.00" min="0.00" required>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" onclick="finalizar()">Finalizar</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Voltar</button>
             </div>
           </div>
         </div>

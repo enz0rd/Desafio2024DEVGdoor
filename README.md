@@ -1,3 +1,6 @@
+<div style='display: flex; justify-content: end; position: absolute; left: 52rem; top: 3.5rem; width: 2rem'><img src='./src/assets/favicon.ico' /></div>
+
+
 Bem vindo ao
 
 # Repositório do desafio DEV 2024 da Gdoor Zucchetti
