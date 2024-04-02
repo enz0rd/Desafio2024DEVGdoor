@@ -2,7 +2,7 @@ Bem vindo ao
 
 # Repositório do desafio DEV 2024 da Gdoor Zucchetti
 
-Leia a [Documentação]('./Documentação.md') para mais informações acerca das tecnologias e funcionamento
+Leia a [Documentação](Documentação.md) para mais informações acerca das tecnologias e funcionamento
 
 
 Para começarmos, tenha o XAMPP e o Node instalado. Abra o XAMPP e inicie os serviços de MySQL e Apache. Depois:
