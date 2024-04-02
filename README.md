@@ -2,27 +2,18 @@ Bem vindo ao
 
 # Repositório do desafio DEV 2024 da Gdoor Zucchetti
 
-Para começarmos, tenha o XAMPP instalado, depois disso rode os seguintes comandos:
+Leia a [Documentação]('./Documentação.md') para mais informações acerca das tecnologias e funcionamento
 
-- `npm install`
 
-  <small>Para instalar as dependências</small>
+Para começarmos, tenha o XAMPP e o Node instalado. Abra o XAMPP e inicie os serviços de MySQL e Apache. Depois:
 
-Abra o XAMPP e inicie os serviços de MySQL e Apache. Depois:
+- `npm run iniciar`
 
-- `npx sequelize-cli db:create`
+  <small>Para instalar as dependências, criar a base de dados, rodar as migrações, povoar o banco de dados e iniciar a aplicação</small>
 
-- `npx sequelize-cli db:migrate`
-
-  <small>Para criar o banco de dados</small>
+Depois desse comando ser rodado, basta utilizar o comando abaixo para rodar a aplicação novamente:
 
 - `npm start`
-
-  <small>Para iniciar o servidor via Nodejs ou</small>
-
-- `npm run dev`
-
-  <small>Para iniciar o servidor via Nodemon</small>
 
 Espero que goste!
 
