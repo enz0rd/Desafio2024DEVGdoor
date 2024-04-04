@@ -3,7 +3,7 @@
 
 Bem vindo ao
 
-# Repositório do desafio DEV 2024 da Gdoor Zucchetti
+# Repositório do Projeto PDV
 
 Leia a [Documentação](Documentação.md) para mais informações acerca das tecnologias e funcionamento
 
