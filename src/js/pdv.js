@@ -296,16 +296,21 @@ var troco = 0;
 
 $(".pagamento").on("focus keyup", function (event) {
   let typingTimer2;
-  if (event.which === 13) {
+  clearTimeout(typingTimer2);
+  // if (event.which === 13) {
     typingTimer2 = setTimeout(() => telaPagamentos($(this)), 500);
-  }
+  // }
 });
 
 function telaPagamentos(element) {
   const val = element;
   // Calcula o valor total da venda
   const totalVenda = parseFloat($("#modalTotal").text());
-  valorPag = val ? parseFloat(val.val()) : 0;
+  if (isNaN(val.val())) {
+    valorPag = 0;
+  } else {
+    valorPag = parseFloat(val.val())
+  }
 
   if (val.attr("id") == "dinheiro") {
     faltaPagar = calcularTotalPagamentos(
