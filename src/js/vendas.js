@@ -35,7 +35,7 @@ $(document).ready(function () {
       var rowNode = table.row
         .add([
           venda.NUMERO,
-          venda.DATA_EMISSAO || "",
+          moment(venda.DATA_EMISSAO).format('DD/MM/YYYY HH:mm:ss') || "",
           venda.STATUS || "-",
           valorVenda,
           venda.nomeOperador,
@@ -43,13 +43,13 @@ $(document).ready(function () {
         ])
         .draw()
         .node();
-      $(rowNode).find("td:last-child").addClass("funcoes");
-      $(rowNode).addClass("cancelada"); // Adiciona a classe 'inativo' se o venda não estiver ativo
-    } else {
-      var rowNode = table.row
+        $(rowNode).find("td:last-child").addClass("funcoes");
+        $(rowNode).addClass("cancelada"); // Adiciona a classe 'inativo' se o venda não estiver ativo
+      } else {
+        var rowNode = table.row
         .add([
           venda.NUMERO,
-          venda.DATA_EMISSAO || "",
+          moment(venda.DATA_EMISSAO).format('DD/MM/YYYY HH:mm:ss') || "",
           venda.STATUS || "-",
           valorVenda,
           venda.nomeOperador,

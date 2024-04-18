@@ -6,7 +6,7 @@ const router = Router();
 router.use(cookieParser());
 
 router.get("/produtos", ProdutoController.listProdutos);
-router.get("/produtos/:id", ProdutoController.listSelectedProduto);
+router.get("/produto/:id", ProdutoController.listSelectedProduto);
 router.get("/produtos/cadastrar", ProdutoController.getCreateProduto);
 router.post("/produtos/cadastrar", ProdutoController.postCreateProduto);
 router.post("/produtos/editar", ProdutoController.postEditarProduto);

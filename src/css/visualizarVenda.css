@@ -8,7 +8,7 @@
 }
 
 .cancelada td {
-  color: gray;
+  color: rgb(185, 49, 49);
 }
 
 .results tr[visible="false"],
@@ -50,7 +50,7 @@
     width: 100%;
     margin: auto;
     overflow-x: auto;
-    margin-bottom: 5rem;
+    margin-bottom: 2rem;
 }
 
 .results thead th,

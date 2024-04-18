@@ -3,6 +3,7 @@ const path = require("path");
 const checkCookies = require("./Auth.js");
 const { where } = require("sequelize");
 const calcularData = require("../utils/Date.js");
+const moment = require("moment");
 
 class PdvController {
   static async getPesquisa(req, res) {
@@ -68,7 +69,7 @@ class PdvController {
 
         var mov_venda = await db.VENDAS.create({
           NUMERO: ultimonumero + 1,
-          DATA_EMISSAO: calcularData(),
+          DATA_EMISSAO: moment(),
           STATUS: 'Venda concluída',
           valor_tot: req.body.valores.total,
           id_operador: userId.dataValues.id,

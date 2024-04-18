@@ -16,6 +16,7 @@
 - **AJAX e JQUERY**: Para equisições em tempo real e manipulação dos elementos;
 - **Path v0.12.7**: Para a localização dos arquivos;
 - **Nodemon v3.1.0**: Para o runtime em devmode;
+- **Moment v2.30.1**: Para manipular datas.
 
 ### **Esquema da base de dados:**
 

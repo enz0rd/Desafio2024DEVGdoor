@@ -23,7 +23,7 @@ $(document).ready(function () {
         const matchDescricao = termo.match(regexDescricao);
 
         if (matchDescricao) {
-          const qtd = parseInt(matchDescricao[1]);
+          const qtd = parseFloat(matchDescricao[1]);
           const descricao = matchDescricao[2];
 
           const produto = $("#searchDropdown .l-produto:first-child");
@@ -46,7 +46,7 @@ $(document).ready(function () {
               .replace("R$", "")
               .trim()
           );
-          const qtdDisponivel = parseInt(
+          const qtdDisponivel = parseFloat(
             produto
               .find(".l-produto-g2 p:last-child")
               .text()
@@ -63,7 +63,7 @@ $(document).ready(function () {
 
           if (match) {
             console.log("testando codigo");
-            const qtd = parseInt(match[1]);
+            const qtd = parseFloat(match[1]);
             const codigo = match[2];
 
             // Obtenha as informações do primeiro resultado
@@ -87,7 +87,7 @@ $(document).ready(function () {
                 .replace("R$", "")
                 .trim()
             );
-            const qtdDisponivel = parseInt(
+            const qtdDisponivel = parseFloat(
               produto
                 .find(".l-produto-g2 p:last-child")
                 .text()
@@ -124,7 +124,7 @@ $(document).ready(function () {
                 .replace("R$", "")
                 .trim()
             );
-            const qtd = parseInt(
+            const qtd = parseFloat(
               $(
                 "#searchDropdown .l-produto:first-child .l-produto-g2 p:last-child"
               )
@@ -166,7 +166,7 @@ $(document).ready(function () {
         } else {
           data.forEach(function (produto) {
             $("#searchDropdown").append(
-              `<div class='l-produto' onclick='openModal(${produto.id},"${produto.descricao}", ${produto.valor_venda}, ${produto.qtd})'>
+              `<div class='l-produto' onclick='openModal(${produto.id},"${produto.descricao}", ${produto.valor_venda}, ${parseFloat(produto.qtd)})'>
                 <div class='l-produto-g1'>
                     <p>#${produto.id}</p>
                     <p>Nome: ${produto.descricao}</p>
@@ -201,14 +201,14 @@ totalVenda = 0;
 
 function lançar() {
   if (
-    parseInt($("#quantidade").val()) >
-      parseInt($("#modalQtd").text().replace("Quantidade disponível: ", "")) ||
-    parseInt($("#quantidade").val()) <= 0
+    parseFloat($("#quantidade").val()) >
+    parseFloat($("#modalQtd").text().replace("Quantidade disponível: ", "")) ||
+    parseFloat($("#quantidade").val()) <= 0
   ) {
     alert(
       "Quantidade indisponível, informe um valor menor ou igual ao disponível."
     );
-  } else if (isNaN(parseInt($("#quantidade").val()))) {
+  } else if (isNaN(parseFloat($("#quantidade").val()))) {
     alert("Informe um valor válido na quantidade do produto");
   } else {
     $("#searchTerm").val("");
@@ -219,7 +219,7 @@ function lançar() {
     const preco = parseFloat(
       $("#modalPreco").text().replace("Preço: R$", "").replace(",", ".")
     );
-    const quantidade = parseInt($("#quantidade").val());
+    const quantidade = parseFloat($("#quantidade").val());
 
     // Calcular o total deste produto
     const totalProduto = preco * quantidade;
@@ -350,7 +350,7 @@ function finalizar() {
   $("#vendaTable tr").each(function () {
     const codigo = parseInt($(this).find("td:first").text());
     const valor = parseFloat($(this).find("td:nth-child(3)").text().replace("R$ ", ""));
-    const quantidade = parseInt($(this).find("td:nth-child(4)").text());
+    const quantidade = parseFloat($(this).find("td:nth-child(4)").text());
     const totalProduto = parseFloat($(this).find("td:nth-child(5)").text().replace("R$ ", ""));
     produtos.push({ codigo, valor, quantidade, totalProduto });
   });

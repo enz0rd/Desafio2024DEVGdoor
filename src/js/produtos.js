@@ -33,7 +33,7 @@ $(document).ready(function() {
             produto.id,
             produto.barras || '',
             produto.descricao || '-',
-            produto.qtd || '',
+            produto.qtd || '0',
             valorVenda,
             valorCusto // Adicionando valor de custo à linha da tabela
         ]).draw().node();
@@ -44,7 +44,7 @@ $(document).ready(function() {
 
         $(rowNode).on('click', function() {
             var idProduto = produto.id;
-            window.location.href = '/produtos/' + idProduto;
+            window.location.href = '/produto/' + idProduto;
         });
     });
 });

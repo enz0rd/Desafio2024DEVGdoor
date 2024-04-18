@@ -31,10 +31,12 @@
       charset="utf8"
       src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"
     ></script>
+    <!-- Link para o Moment via CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <link rel="stylesheet" href="../src/css/navbar.css" />
     <link rel="stylesheet" href="../src/css/inicio.css" />
-    <link rel="stylesheet" href="../src/css/vendas.css" />
-    <title>Vendas - PDV Simples</title>
+    <link rel="stylesheet" href="../src/css/visualizarVenda.css" />
+    <title>Venda #<%= data.venda.id %> - PDV Simples</title>
   </head>
   <body>
     <nav>
@@ -64,14 +66,16 @@
       <h1 class="form-title barracima">Venda #<%= data.venda.id %>:</h1>
       <div class="form-row mb-2 d-flex justify-content-between flex-wrap">
         <div class="form-group col-md-2 m-1">
-          <small for="descricao">Data/Hora de emissão</small>
-          <p class="campos-venda" id="datahora">
-            <%= new Date(data.venda.DATA_EMISSAO).toLocaleString() %>
-          </p>
+          <small>Data/Hora de emissão</small>
+          <p class="campos-venda" id="datahora"></p>
         </div>
         <div class="form-group col-md-2 m-1">
-          <small for="qtd">Valor total</small>
+          <small>Valor total</small>
           <p class="campos-venda">R$<%= data.venda.valor_tot.toFixed(2) %></p>
+        </div>
+        <div class="form-group col-md-2 m-1">
+          <small>Operador</small>
+          <p class="campos-venda"><%= data.nomeOperador %></p>
         </div>
         <div class="form-group col-md-2 m-1">
           <small>Status</small>
@@ -137,7 +141,8 @@
       <span class="meu-nome">Enzo Rossi Daltoé - 2024</span>
     </div>
     <script>
-      var data = <%- JSON.stringify(data) %>;
+      var datahora = <%- JSON.stringify(data.venda.DATA_EMISSAO )%>;
+      document.getElementById('datahora').innerHTML = moment(datahora).format('DD/MM/YYYY HH:mm:ss');
     </script>
     <script src="../src/js/visualizarVenda.js"></script>
   </body>
