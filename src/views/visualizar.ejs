@@ -25,10 +25,12 @@
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
     <link rel="stylesheet" href="../src/css/navbar.css" />
     <link rel="stylesheet" href="../src/css/inicio.css" />
-    <link rel="stylesheet" href="../src/css/produtos.css" />
-    <title>Produtos - PDV Simples</title>
-  </head>
-  <body>
+    <link rel="stylesheet" href="../src/css/cadastro.css" />
+    <link rel="stylesheet" href="../src/css/visualizarVenda.css">
+    <title>Venda #<%= data.venda.id %> - PDV Simples</title>
+</head>
+
+<body>
     <nav>
       <div class="navbar">
         <div class="container nav-container">
@@ -53,37 +55,56 @@
       </div>
     </nav>
     <div class="container" style="margin: auto">
-      <div class="barracima">
-        <h1 class="form-title">Produtos</h1>
-        <a href="/produtos/cadastrar" class="btn btn-primary">Cadastrar novo</a>
-      </div>
+      <form id="cadastro-produto" method="post" action="/produtos/editar">
+        <h1 class="form-title">Venda #<%= data.venda.id %>:</h1>
+        <div class="form-row mb-2  d-flex justify-content-between flex-wrap">
+          <div class="form-group col-md-2 m-1">
+            <small for="descricao">Data/Hora de emissão</small>
+            <p class="campos-venda" id="datahora"><%= new Date(data.venda.DATA_EMISSAO).toLocaleString() %></p>
+          </div>
+          <div class="form-group col-md-2 m-1">
+            <small for="qtd">Valor total</small>
+            <p class="campos-venda">R$<%= data.venda.valor_tot.toFixed(2) %></p>
+          </div>
+          <div class="form-group col-md-2 m-1">
+            <small>Status</small>
+            <p class="status-venda"><b><%= data.venda.STATUS %></b></p>
+          </div>
+        </div>
+        <div class="scrollable-table">
+          <table id="tab_vendas" class="table table-hover table-bordered results">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th class="col-md-1 col-xs-1">Produto</th>
+                <th class="col-md-1 col-xs-1">Quantidade</th>
+                <th class="col-md-1 col-xs-1">Valor unitário</th>
+                <th class="col-md-1 col-xs-1">QTD</th>
+                <th class="col-md-1 col-xs-1">Valor total</th>
+              </tr>
+              <tr class="warning no-result">
+                <td colspan="6"><i class="fa fa-warning"></i> Nenhum resultado encontrado</td>
+              </tr>
+            </thead>
+            <tbody id="table-body">
+              
+            </tbody>
+          </table>
+        </div>
+        <br />
+        <button
+          type="button"
+          onclick=window.location.href='/vendas'
+          class="btn btn-secondary"
+        >
+          Voltar
+        </button>
+      </form>
     </div>
-    <div class="scrollable-table">
-      <table id="tab_produtos" class="table table-hover table-bordered results">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th class="col-md-2 col-xs-2">Cód. Barras</th>
-            <th class="col-md-5 col-xs-5">Descrição</th>
-            <th class="col-md-1 col-xs-1">QTD</th>
-            <th class="col-md-2 col-xs-4">Valor de Venda</th>
-            <th class="col-md-2 col-xs-4">Valor Custo</th>
-          </tr>
-          <tr class="warning no-result">
-            <td colspan="6"><i class="fa fa-warning"></i> Nenhum resultado encontrado</td>
-          </tr>
-        </thead>
-        <tbody id="table-body">
-          
-        </tbody>
-      </table>
-    </div>
-    <div class="barra-fim fixed-bottom">
+    <div class="barra-fim fixed-bottom" style="z-index: 2">
       <span class="meu-nome">Enzo Rossi Daltoé - 2024</span>
     </div>
-    <script>
-      var produtos = <%- JSON.stringify(data) %>;
-    </script>
-    <script src="../src/js/produtos.js"></script>
+    <script>var data = <%- data %>;</script>
+    <script src="../src/visualizarVenda.js"></script>
   </body>
 </html>

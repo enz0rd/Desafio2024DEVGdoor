@@ -1,5 +1,5 @@
 {
-  "name": "desafiodevgdoor",
+  "name": "pdvsimples",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -16,16 +16,16 @@
   "author": "enz0rd",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.19.2",
-    "cookie-parser": "^1.4.6",
     "body-parser": "^1.20.2",
-    "ejs": "^3.1.9",
-    "mysql2": "^3.9.3",
-    "sequelize": "^6.37.2",
-    "sequelize-cli": "^6.6.2",
+    "cookie-parser": "^1.4.6",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
     "express-session": "^1.18.0",
-    "serve-favicon": "^2.5.0",
+    "mysql2": "^3.9.6",
     "nodemon": "^3.1.0",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "sequelize": "^6.37.3",
+    "sequelize-cli": "^6.6.2",
+    "serve-favicon": "^2.5.0"
   }
 }

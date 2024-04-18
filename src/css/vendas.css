@@ -1,0 +1,61 @@
+.barracima {
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.cancelada td {
+  color: gray;
+}
+
+.results tr[visible="false"],
+.no-result {
+  display: none;
+}
+
+.results tr[visible="true"] {
+  display: table-row;
+}
+
+#tab_vendas {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    display: table;
+    margin: auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+#tab_vendas th,
+#tab_vendas td {
+    padding: 10px; /* Ajuste conforme necessário */
+}
+
+.table {
+    display: table;
+}
+
+.scrollable-table {
+    justify-content: center;
+    width: 80%;
+    margin: auto;
+    overflow-x: auto;
+    margin-bottom: 5rem;
+}
+
+.results thead th,
+.results tbody td {
+    white-space: nowrap; /* Evita que o texto quebre em várias linhas */
+}
+
+.funcoes {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: center;
+}

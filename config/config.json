@@ -2,21 +2,21 @@
   "development": {
     "username": "root",
     "password": null,
-    "database": "databaseDesafio_dev",
+    "database": "databasepdvsimples_dev",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
     "password": null,
-    "database": "databaseDesafio_test",
+    "database": "databasepdvsimples_test",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "production": {
     "username": "root",
     "password": null,
-    "database": "databaseDesafio_prod",
+    "database": "databasepdvsimples_prod",
     "host": "127.0.0.1",
     "dialect": "mysql"
   }

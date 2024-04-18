@@ -289,17 +289,14 @@ var totalPagamentos = {
   cartaodebito: 0,
   cartaocredito: 0,
   pix: 0,
+  troco: 0,
 };
 
 var faltaPagar = 0;
 var troco = 0;
 
 $(".pagamento").on("focus keyup", function (event) {
-  let typingTimer2;
-  clearTimeout(typingTimer2);
-  // if (event.which === 13) {
-    typingTimer2 = setTimeout(() => telaPagamentos($(this)), 500);
-  // }
+  telaPagamentos($(this));
 });
 
 function telaPagamentos(element) {
@@ -309,89 +306,102 @@ function telaPagamentos(element) {
   if (isNaN(val.val())) {
     valorPag = 0;
   } else {
-    valorPag = parseFloat(val.val())
+    valorPag = parseFloat(val.val());
   }
 
-  if (val.attr("id") == "dinheiro") {
-    faltaPagar = calcularTotalPagamentos(
-      "dinheiro",
-      totalVenda,
-      totalPagamentos
-    );
-    console.log(faltaPagar);
-    if (valorPag >= faltaPagar) {
-      troco = valorPag - faltaPagar;
-      totalPagamentos["dinheiro"] = faltaPagar;
-      faltaPagar = 0;
-    } else {
-      console.log(isNaN(valorPag));
-      totalPagamentos["dinheiro"] = isNaN(valorPag) ? valorPag : 0;
-      faltaPagar -= valorPag;
-      troco = 0;
-    }
+  switch(val.attr("id")) {
+    case "dinheiro":
+      totalPagamentos.dinheiro = isNaN(valorPag) ? 0 : valorPag;
+      break;
+    case "cartaodebito":
+      totalPagamentos.cartaodebito = isNaN(valorPag) ? 0 : valorPag;
+      break;
+    case "cartaocredito":
+      totalPagamentos.cartaocredito = isNaN(valorPag) ? 0 : valorPag;
+      break;
+    case "pix":
+      totalPagamentos.pix = isNaN(valorPag) ? 0 : valorPag;
+      break;
+  }
+
+  // Calcula o valor total dos pagamentos
+  const pagamentos = totalPagamentos.dinheiro + totalPagamentos.cartaodebito + totalPagamentos.cartaocredito + totalPagamentos.pix;
+
+  if (pagamentos > totalVenda) {
+    faltaPagar = 0;
+    totalPagamentos.troco = pagamentos - totalVenda;
   } else {
-    console.log(val.attr("id"));
-    faltaPagar = calcularTotalPagamentos(
-      val.attr("id"),
-      totalVenda,
-      totalPagamentos
-    );
-    console.log(faltaPagar);
-    if (valorPag > faltaPagar) {
-      alert(
-        "O valor do pagamento não pode ser maior que o valor total da venda nessa forma de pagamento."
-      );
-      val.val("");
-    } else {
-      console.log(
-        "Antes de atribuir valor a totalPagamentos:",
-        totalPagamentos
-      );
-      totalPagamentos[val.attr("id")] = isNaN(valorPag) ? valorPag : 0;
-      console.log(
-        "Depois de atribuir valor a totalPagamentos:",
-        totalPagamentos
-      );
-      faltaPagar -= valorPag;
-    }
+    faltaPagar = totalVenda - pagamentos;
+    totalPagamentos.troco = 0;
   }
 
   $("#faltaPagar").text("R$" + faltaPagar.toFixed(2));
-  $("#troco").text("R$" + troco.toFixed(2));
+  $("#troco").text("R$" + totalPagamentos.troco.toFixed(2));
 }
 
-function calcularTotalPagamentos(formaExcluida, valorTotal, totalPagamentos) {
-  let soma;
-  console.log(totalPagamentos);
-  // Calcula a soma das formas de pagamento excluindo a forma especificada
-  switch (formaExcluida) {
-    case "dinheiro":
-      soma =
-        totalPagamentos.cartaodebito +
-        totalPagamentos.cartaocredito +
-        totalPagamentos.pix;
-      break;
-    case "cartaodebito":
-      soma =
-        totalPagamentos.dinheiro +
-        totalPagamentos.cartaocredito +
-        totalPagamentos.pix;
-      break;
-    case "cartaocredito":
-      soma =
-        totalPagamentos.dinheiro +
-        totalPagamentos.cartaodebito +
-        totalPagamentos.pix;
-      break;
-    case "pix":
-      soma =
-        totalPagamentos.dinheiro +
-        totalPagamentos.cartaodebito +
-        totalPagamentos.cartaocredito;
-      break;
-    default:
-      soma = 0;
+function finalizar() {
+  if(faltaPagar > 0) {
+    alert("Falta pagar o valor total da venda.");
+    return;
   }
-  // Retorna o valor total menos a soma das outras formas de pagamento
-  return valorTotal - soma;
+
+  console.log("Finalizando venda...");
+  const produtos = [];
+  $("#vendaTable tr").each(function () {
+    const codigo = parseInt($(this).find("td:first").text());
+    const valor = parseFloat($(this).find("td:nth-child(3)").text().replace("R$ ", ""));
+    const quantidade = parseInt($(this).find("td:nth-child(4)").text());
+    const totalProduto = parseFloat($(this).find("td:nth-child(5)").text().replace("R$ ", ""));
+    produtos.push({ codigo, valor, quantidade, totalProduto });
+  });
+
+  const pagamentos = {
+    dinheiro: totalPagamentos.dinheiro,
+    cartaodebito: totalPagamentos.cartaodebito,
+    cartaocredito: totalPagamentos.cartaocredito,
+    pix: totalPagamentos.pix,
+  };
+
+  const valores = {
+    total: parseFloat($("#modalTotal").text()),
+    troco: totalPagamentos.troco,
+  }
+
+  const infoVenda = {
+    produtos,
+    pagamentos,
+    valores,
+  };
+
+  console.log(infoVenda);
+
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", "/pdv/realizar-venda", true);
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+      if (xhr.status === 200) {
+        // Verificar o tipo de resposta
+        var contentType = xhr.getResponseHeader("Content-Type");
+        if (contentType && contentType.includes("application/json")) {
+          // A resposta é JSON válido
+          var jsonResponse = JSON.parse(xhr.responseText);
+          if (jsonResponse.codigo == 400) {
+            // Exibir mensagem de erro
+            alert(jsonResponse.message);
+          } else if(jsonResponse.codigo == 200) {
+            alert("Venda realizada com sucesso!");
+            window.location.href = "/pdv";
+          }
+        } else {
+          window.location.href = "/pdv";
+          // A resposta não é um JSON válido, exibir mensagem genérica
+        }
+      } else {
+        // Exibir mensagem de erro genérica
+        alert("Ocorreu um erro.");
+      }
+    }
+  };
+  xhr.send(JSON.stringify(infoVenda));
 }

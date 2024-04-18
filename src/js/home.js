@@ -4,7 +4,7 @@ document.addEventListener("keyup", (e) => {
     window.location.href = "/produtos";
   } else if (e.key === "v") {
     e.preventDefault();
-    window.location.href = "/pdv/listar";
+    window.location.href = "/vendas";
   } else if (e.key === "u") {
     e.preventDefault();
     window.location.href = "/usuarios";

@@ -25,8 +25,9 @@ Changelogs:
 - [X] Tela de login e autenticação
 - [X] CRUD de Usuários
 - [X] CRUD de Produtos
-- [ ] Envio de vendas (50%)
-- [ ] Listagem de Vendas
+- [X] Envio de vendas
+- [X] Listagem de Vendas
+- [X] Cancelamento de Vendas (Com dedução de estoque)
 
 Planos futuros
 

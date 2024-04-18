@@ -7,6 +7,8 @@ const app = express();
 
 routes(app);
 
+process.env.TZ = "America/Sao_Paulo";
+
 app.use(express.urlencoded({ extended: true }));
 
 const port = 3000;
