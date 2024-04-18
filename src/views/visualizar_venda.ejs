@@ -141,6 +141,7 @@
       <span class="meu-nome">Enzo Rossi Daltoé - 2024</span>
     </div>
     <script>
+      var data = <%- JSON.stringify(data) %>;
       var datahora = <%- JSON.stringify(data.venda.DATA_EMISSAO )%>;
       document.getElementById('datahora').innerHTML = moment(datahora).format('DD/MM/YYYY HH:mm:ss');
     </script>
