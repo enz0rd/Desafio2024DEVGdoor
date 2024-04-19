@@ -38,3 +38,7 @@ code {
   flex-wrap: wrap;
   gap: 1rem;
 }
+
+#msgModal {
+  transition: 0.2s ease-in-out;
+}

@@ -46,3 +46,8 @@
     flex-wrap: wrap;
     justify-content: space-between;
 }
+
+.dica {
+    margin-top: 2rem;
+    margin-trim: auto;
+}

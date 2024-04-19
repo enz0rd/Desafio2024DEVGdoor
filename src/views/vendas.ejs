@@ -78,6 +78,41 @@
           </tbody>
         </table>
       </div>
+    <!-- popup mensagem -->
+    <div class="modal fade z-3" id="msgModal" tabindex="-1" aria-labelledby="msgModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="msgModalLabel"></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p id="msgRetorno" class="form-control"></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ok</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- popup choice -->
+    <div class="modal fade z-3" id="choiceModal" tabindex="-1" aria-labelledby="choiceModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="choiceModalLabel">Cancelamento de venda</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p id="choiceMsg" class="form-control">Tem certeza que deseja excluir essa venda?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" id="confirmar" data-bs-dismiss="modal">Cancelar Venda</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Voltar</button>
+          </div>
+        </div>
+      </div>
+    </div>
     </div>
     <div class="barra-fim fixed-bottom">
       <span class="meu-nome">Enzo Rossi Daltoé - 2024</span>

@@ -1,17 +1,47 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
 form {
+  padding: 2rem;
   display: flex;
+  margin-top: 2rem;
   flex-direction: column;
-  margin: 2rem;
+  justify-content: space-around;
   align-items: center;
-  justify-content: center;
 }
 
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+.login-form {
+  background-color: white;
+  padding: 2rem;
+  border: 1px solid #c7c7c7;
+  border-radius: 0.7rem;
+  justify-content: center;
+  box-shadow: #c7c7c767 0px 0px 10px 0px;
+}
+
+.title-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  background-color: white;
+  border-bottom: 5px solid #c7c7c767;
+  box-shadow: #c7c7c767 0px 0px 10px 0px;
+}
+
+.title-logo {
+  position: center;
+}
+
+body {
+  background-image: url('../assets/fundo.jpg');
+  background-color: rgba(255, 255, 255, 0.2);
+  background-size: cover;
+}
 
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 body {
@@ -20,4 +50,28 @@ body {
 
 .login-title {
   font-weight: 600;
+}
+
+.barra-fim {
+  padding-top: 0.5rem;
+  background-color: white;
+  border-top: #c7c7c767 5px solid;
+}
+
+.texto-inicio {
+  padding: 2rem;
+  border-radius: 0.7rem;
+  border: 1px solid #c7c7c7;
+  background-color: white;
+  box-shadow: #c7c7c767 0px 0px 10px 0px;
+  margin: 0 2rem 0 2rem;
+}
+
+.content {
+  margin: auto;
+  display: flex;
+  word-wrap: normal;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

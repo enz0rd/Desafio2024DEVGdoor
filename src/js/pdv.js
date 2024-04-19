@@ -12,6 +12,12 @@ $(document).ready(function () {
     }
   });
 
+  $(document).keypress(function (event) {
+    if (event.key === "*") {
+      openQtdModal();
+    }
+  });
+
   $("#searchTerm").keypress(function (event) {
     if (event.which === 13) {
       const numResultados = $("#searchDropdown").children().length;
@@ -19,14 +25,12 @@ $(document).ready(function () {
         const termo = $(this).val().trim();
 
         // Verifique primeiro o padrão: quantidade*descrição
-        const descricaoLimpa = termo.replace(',', '.');
-        const regexDescricao = /(\d+(?:[\.,]\d+)?)\*(.+)/g; // Para quantidade*descrição
+        const descricaoLimpa = termo.replace(",", ".");
+        const regexDescricao = /^(.+)/g; // Para quantidade*descrição
         const matchDescricao = descricaoLimpa.match(regexDescricao);
 
-        
         if (matchDescricao) {
-          const qtd = parseFloat(matchDescricao[1]);
-          const descricao = matchDescricao[2];
+          const descricao = matchDescricao[1];
 
           const produto = $("#searchDropdown .l-produto:first-child");
           const id = parseInt(
@@ -55,17 +59,19 @@ $(document).ready(function () {
               .replace("Qtd: ", "")
               .trim()
           );
-
-          openModal(id, desc, preco, qtdDisponivel);
-          $("#quantidade").val(qtd);
+          // verifica se a quantidade informada é válida
+          qtdSelecionada = parseFloat($("#qtdSelecionada").val())
+            ? parseFloat($("#qtdSelecionada").val())
+            : 1;
+          // Abra o modal com as informações do produto e a quantidade informada
+          openModal(id, desc, preco, qtdDisponivel, qtdSelecionada);
         } else {
           // Verifique o padrão: quantidade*codigodoproduto
-          const regexCodigoProduto = /^(\d+(?:[\.,]\d+)?)\*(\w+)\*(\w+)$/; // Para quantidade*codigodoproduto
+          const regexCodigoProduto = /^(\w+)$/; // Para quantidade*codigodoproduto
           const match = termo.match(regex);
 
           if (match) {
-            const qtd = parseFloat(match[1]);
-            const codigo = match[2];
+            const codigo = match[1];
 
             // Obtenha as informações do primeiro resultado
             const produto = $("#searchDropdown .l-produto:first-child");
@@ -98,9 +104,12 @@ $(document).ready(function () {
 
             // Verifique se o código do produto corresponde ao código informado
             if (descricao.includes(codigo) || id == codigo || codigo == preco) {
+              // Verifica se a quantidade informada é válida
+              qtdSelecionada = parseFloat($("#qtdSelecionada").val())
+                ? parseFloat($("#qtdSelecionada").val())
+                : 1;
               // Abra o modal com as informações do produto e a quantidade informada
-              openModal(id, descricao, preco, qtdDisponivel);
-              $("#quantidade").val(qtd);
+              openModal(id, descricao, preco, qtdDisponivel, qtdSelecionada);
             }
           } else {
             // Se o termo não seguir nenhum dos padrões especificados, faça a pesquisa normalmente
@@ -133,8 +142,9 @@ $(document).ready(function () {
                 .replace("Qtd: ", "")
                 .trim()
             );
-
-            openModal(id, descricao, preco, qtd);
+            qtdSelecionada = parseFloat($("#qtdSelecionada").val()) ? parseFloat($("#qtdSelecionada").val()) : 1;
+            // Abra o modal com as informações do produto e a quantidade informada
+            openModal(id, descricao, preco, qtd, qtdSelecionada);
           }
         }
       }
@@ -144,15 +154,15 @@ $(document).ready(function () {
   function performSearch() {
     let searchTerm = $("#searchTerm").val().trim();
 
-    const regex = /^(\d+)\*(\w+)$/; // Para quantidade*codigodoproduto
+    const regex = /^(\w+)$/; // codigodoproduto
     const match = searchTerm.match(regex);
-    const regexDescricao = /^(\d+)\*(.+)$/; // Para quantidade*descrição
+    const regexDescricao = /^(.+)$/; // descrição
     const matchDescricao = searchTerm.match(regexDescricao);
 
     if (match) {
-      searchTerm = match[2]; // Remover a quantidade do termo de pesquisa
+      searchTerm = match[1]; // Remover a quantidade do termo de pesquisa
     } else if (matchDescricao) {
-      searchTerm = matchDescricao[2]; // Remover a quantidade do termo de pesquisa
+      searchTerm = matchDescricao[1]; // Remover a quantidade do termo de pesquisa
     }
 
     $.ajax({
@@ -167,7 +177,7 @@ $(document).ready(function () {
         } else {
           data.forEach(function (produto) {
             $("#searchDropdown").append(
-              `<div class='l-produto' onclick='openModal(${produto.id},"${produto.descricao}", ${produto.valor_venda}, ${parseFloat(produto.qtd)})'>
+              `<div class='l-produto' onclick='openModal(${produto.id},"${produto.descricao}", ${produto.valor_venda}, ${parseFloat(produto.qtd)}, ${qtdSelecionada})'>
                 <div class='l-produto-g1'>
                     <p>#${produto.id}</p>
                     <p>Nome: ${produto.descricao}</p>
@@ -189,36 +199,57 @@ $(document).ready(function () {
   }
 });
 
-function openModal(codigo, descricao, preco, qtd) {
-  $("#modalCodigo").text(codigo);
-  $("#modalDescricao").text(descricao);
-  $("#modalPreco").text(`Preço: R$${preco}`);
-  $("#modalQtd").text(`Quantidade disponível: ${qtd}`);
-  $("#quantidade").val(1);
+function openQtdModal() {
+  $("#qtdSelecionada").val(0);
+  $("#qtdModal").modal("show");
+}
+
+function salvarQtd() {
+  qtdSelecionada = parseFloat($("#qtdSelecionada").val())
+    ? parseFloat($("#qtdSelecionada").val())
+    : 1;
+  $("#qtdModal").modal("hide");
+}
+
+function openMsgModal(title, msg) {
+  $("#msgModalLabel").text(title);
+  $("#msgRetorno").text(msg);
+  $("#msgModal").modal("show");
+}
+
+function openModal(codigo, descricao, preco, qtd, qtdSelecionada) {
+  $("#modalCodigoProd").text(codigo);
+  $("#modalDescricaoProd").text(descricao);
+  $("#modalPrecoProd").text(`Preço: R$${preco}`);
+  $("#modalQtdProd").text(`Quantidade disponível: ${qtd}`);
+  $("#quantidade").val(qtdSelecionada);
   $("#produtoModal").modal("show");
 }
 
 totalVenda = 0;
 
 function lançar() {
+  console.log($("#quantidade").val())
   if (
     parseFloat($("#quantidade").val()) >
-    parseFloat($("#modalQtd").text().replace("Quantidade disponível: ", "")) ||
+      parseFloat(
+        $("#modalQtdProd").text().replace("Quantidade disponível: ", "")
+      ) ||
     parseFloat($("#quantidade").val()) <= 0
   ) {
-    alert(
+    openMsgModal("Quantidade Indisponível",
       "Quantidade indisponível, informe um valor menor ou igual ao disponível."
     );
   } else if (isNaN(parseFloat($("#quantidade").val()))) {
-    alert("Informe um valor válido na quantidade do produto");
+    openMsgModal("Quantidade inválida", "Informe um valor válido na quantidade do produto");
   } else {
     $("#searchTerm").val("");
     $("#searchDropdown").removeClass("d-show").addClass("d-none");
     $("#searchDropdown").empty();
-    const codigo = $("#modalCodigo").text();
-    const descricao = $("#modalDescricao").text();
+    const codigo = $("#modalCodigoProd").text();
+    const descricao = $("#modalDescricaoProd").text();
     const preco = parseFloat(
-      $("#modalPreco").text().replace("Preço: R$", "").replace(",", ".")
+      $("#modalPrecoProd").text().replace("Preço: R$", "").replace(",", ".")
     );
     const quantidade = parseFloat($("#quantidade").val());
 
@@ -227,7 +258,7 @@ function lançar() {
 
     // Adicionar o registro à tabela de vendas
     if (verificarProdutoExistente(codigo)) {
-      alert("Este produto já foi lançado na venda.");
+      openMsgModal("Produto já lançado", "Este produto já foi lançado na venda.")
     } else {
       // Adicionar o produto na tabela
       $("#vendaTable").append(`
@@ -278,9 +309,10 @@ function removerItem(btn) {
 function openPagamentos() {
   var valor_total = parseFloat($("#total").text());
   if (valor_total == 0) {
-    alert("Nenhum produto foi adicionado a venda.");
+    openMsgModal("Adicione Produtos","Nenhum produto foi adicionado a venda.");
   } else {
     $("#modalTotal").text(valor_total.toFixed(2));
+    $("#faltaPagar").text(valor_total.toFixed(2));
     $("#pagamentosModal").modal("show");
   }
 }
@@ -304,13 +336,14 @@ function telaPagamentos(element) {
   const val = element;
   // Calcula o valor total da venda
   const totalVenda = parseFloat($("#modalTotal").text());
+
   if (isNaN(val.val())) {
     valorPag = 0;
   } else {
     valorPag = parseFloat(val.val());
   }
 
-  switch(val.attr("id")) {
+  switch (val.attr("id")) {
     case "dinheiro":
       totalPagamentos.dinheiro = isNaN(valorPag) ? 0 : valorPag;
       break;
@@ -326,7 +359,11 @@ function telaPagamentos(element) {
   }
 
   // Calcula o valor total dos pagamentos
-  const pagamentos = totalPagamentos.dinheiro + totalPagamentos.cartaodebito + totalPagamentos.cartaocredito + totalPagamentos.pix;
+  const pagamentos =
+    totalPagamentos.dinheiro +
+    totalPagamentos.cartaodebito +
+    totalPagamentos.cartaocredito +
+    totalPagamentos.pix;
 
   if (pagamentos > totalVenda) {
     faltaPagar = 0;
@@ -341,68 +378,72 @@ function telaPagamentos(element) {
 }
 
 function finalizar() {
-  if(faltaPagar > 0) {
-    alert("Falta pagar o valor total da venda.");
-    return;
-  }
-
-  console.log("Finalizando venda...");
-  const produtos = [];
-  $("#vendaTable tr").each(function () {
-    const codigo = parseInt($(this).find("td:first").text());
-    const valor = parseFloat($(this).find("td:nth-child(3)").text().replace("R$ ", ""));
-    const quantidade = parseFloat($(this).find("td:nth-child(4)").text());
-    const totalProduto = parseFloat($(this).find("td:nth-child(5)").text().replace("R$ ", ""));
-    produtos.push({ codigo, valor, quantidade, totalProduto });
-  });
-
-  const pagamentos = {
-    dinheiro: totalPagamentos.dinheiro,
-    cartaodebito: totalPagamentos.cartaodebito,
-    cartaocredito: totalPagamentos.cartaocredito,
-    pix: totalPagamentos.pix,
-  };
-
-  const valores = {
-    total: parseFloat($("#modalTotal").text()),
-    troco: totalPagamentos.troco,
-  }
-
-  const infoVenda = {
-    produtos,
-    pagamentos,
-    valores,
-  };
-
-  console.log(infoVenda);
-
-  var xhr = new XMLHttpRequest();
-  xhr.open("POST", "/pdv/realizar-venda", true);
-  xhr.setRequestHeader("Content-Type", "application/json");
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState === 4) {
-      if (xhr.status === 200) {
-        // Verificar o tipo de resposta
-        var contentType = xhr.getResponseHeader("Content-Type");
-        if (contentType && contentType.includes("application/json")) {
-          // A resposta é JSON válido
-          var jsonResponse = JSON.parse(xhr.responseText);
-          if (jsonResponse.codigo == 400) {
-            // Exibir mensagem de erro
-            alert(jsonResponse.message);
-          } else if(jsonResponse.codigo == 200) {
-            alert("Venda realizada com sucesso!");
+  if (parseFloat($("#faltaPagar").text()) > 0) {
+    console.log("Falta pagar o valor total da venda.")
+    openMsgModal("Informe os pagamentos", "Falta pagar o valor total da venda.");
+  } else {
+    console.log("Finalizando venda...");
+    const produtos = [];
+    $("#vendaTable tr").each(function () {
+      const codigo = parseInt($(this).find("td:first").text());
+      const valor = parseFloat(
+        $(this).find("td:nth-child(3)").text().replace("R$ ", "")
+      );
+      const quantidade = parseFloat($(this).find("td:nth-child(4)").text());
+      const totalProduto = parseFloat(
+        $(this).find("td:nth-child(5)").text().replace("R$ ", "")
+      );
+      produtos.push({ codigo, valor, quantidade, totalProduto });
+    });
+  
+    const pagamentos = {
+      dinheiro: totalPagamentos.dinheiro,
+      cartaodebito: totalPagamentos.cartaodebito,
+      cartaocredito: totalPagamentos.cartaocredito,
+      pix: totalPagamentos.pix,
+    };
+  
+    const valores = {
+      total: parseFloat($("#modalTotal").text()),
+      troco: totalPagamentos.troco,
+    };
+  
+    const infoVenda = {
+      produtos,
+      pagamentos,
+      valores,
+    };
+  
+    console.log(infoVenda);
+  
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "/pdv/realizar-venda", true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          // Verificar o tipo de resposta
+          var contentType = xhr.getResponseHeader("Content-Type");
+          if (contentType && contentType.includes("application/json")) {
+            // A resposta é JSON válido
+            var jsonResponse = JSON.parse(xhr.responseText);
+            if (jsonResponse.codigo == 400) {
+              // Exibir mensagem de erro
+              openMsgModal("Erro:", jsonResponse.message);
+            } else if (jsonResponse.codigo == 200) {
+              openMsgModal("Venda Finalizada", "Venda realizada com sucesso!");
+              window.location.href = "/pdv";
+            }
+          } else {
             window.location.href = "/pdv";
+            // A resposta não é um JSON válido, exibir mensagem genérica
           }
         } else {
-          window.location.href = "/pdv";
-          // A resposta não é um JSON válido, exibir mensagem genérica
+          // Exibir mensagem de erro genérica
+          openMsgModal("Erro","Ocorreu um erro ao realizar a venda.");
         }
-      } else {
-        // Exibir mensagem de erro genérica
-        alert("Ocorreu um erro.");
       }
-    }
-  };
-  xhr.send(JSON.stringify(infoVenda));
+    };
+    xhr.send(JSON.stringify(infoVenda));
+  }
 }

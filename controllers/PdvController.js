@@ -151,7 +151,7 @@ class PdvController {
       try {
         var resp = await db.VENDAS.findAll(
           {
-            attributes: ['NUMERO', 'DATA_EMISSAO', 'STATUS', 'valor_tot', 'id_operador', 'cancelada']
+            attributes: ['NUMERO', 'DATA_EMISSAO', 'STATUS', 'valor_tot', 'id_operador', 'cancelada'],
           }
         );
         const jsonString = JSON.stringify(resp);

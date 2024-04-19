@@ -23,19 +23,20 @@ $(document).ready(function () {
         sSortDescending: ": Ordenar colunas de forma descendente",
       },
     },
+    order: [[0, "desc"]],
   });
 
   vendas.forEach(function (venda) {
     var valorVenda = venda.valor_tot ? "R$" + venda.valor_tot.toFixed(2) : "";
 
-    var botaoCancelar = `<button class="btn btn-outline-danger justify-center btn-sm" title="Cancelar Venda" onclick=CancelarVenda(${venda.NUMERO})>❌</button>`;
+    var botaoCancelar = `<button class="btn btn-outline-danger justify-center btn-sm" title="Cancelar Venda" onclick=showPopupCancelar(${venda.NUMERO})>❌</button>`;
     var botaoVisualizar = `<button class="btn btn-outline-primary justify-center btn-sm" title="Visualizar Venda" onclick=window.location.href='/venda/${venda.NUMERO}'>🔍</button>`;
 
     if (venda.cancelada) {
       var rowNode = table.row
         .add([
           venda.NUMERO,
-          moment(venda.DATA_EMISSAO).format('DD/MM/YYYY HH:mm:ss') || "",
+          moment(venda.DATA_EMISSAO).format("DD/MM/YYYY HH:mm:ss") || "",
           venda.STATUS || "-",
           valorVenda,
           venda.nomeOperador,
@@ -43,13 +44,13 @@ $(document).ready(function () {
         ])
         .draw()
         .node();
-        $(rowNode).find("td:last-child").addClass("funcoes");
-        $(rowNode).addClass("cancelada"); // Adiciona a classe 'inativo' se o venda não estiver ativo
-      } else {
-        var rowNode = table.row
+      $(rowNode).find("td:last-child").addClass("funcoes");
+      $(rowNode).addClass("cancelada"); // Adiciona a classe 'inativo' se o venda não estiver ativo
+    } else {
+      var rowNode = table.row
         .add([
           venda.NUMERO,
-          moment(venda.DATA_EMISSAO).format('DD/MM/YYYY HH:mm:ss') || "",
+          moment(venda.DATA_EMISSAO).format("DD/MM/YYYY HH:mm:ss") || "",
           venda.STATUS || "-",
           valorVenda,
           venda.nomeOperador,
@@ -62,35 +63,43 @@ $(document).ready(function () {
   });
 });
 
+function showPopupCancelar(id) {
+  $("#choiceModal").modal("show");
+  $("#confirmar").click(function () {
+    CancelarVenda(id);
+  });
+}
+
 function CancelarVenda(id) {
-  const choice = confirm("Tem certeza que deseja cancelar essa venda?");
-  if (choice === true) {
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", `/venda/cancelar/${id}`, true);
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.onreadystatechange = function () {
-      if (xhr.readyState === 4) {
-        if (xhr.status === 200) {
-          // Verificar o tipo de resposta
-          var contentType = xhr.getResponseHeader("Content-Type");
-          if (contentType && contentType.includes("application/json")) {
-            // A resposta é JSON válido
-            var jsonResponse = JSON.parse(xhr.responseText);
-            alert(jsonResponse.message);
-            window.location.reload();
-          } else {
-            alert("Venda cancelada!");
-            window.location.reload();
-            // A resposta não é um JSON válido, exibir mensagem genérica
-          }
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", `/venda/cancelar/${id}`, true);
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+      if (xhr.status === 200) {
+        // Verificar o tipo de resposta
+        var contentType = xhr.getResponseHeader("Content-Type");
+        if (contentType && contentType.includes("application/json")) {
+          // A resposta é JSON válido
+          var jsonResponse = JSON.parse(xhr.responseText);
+          openMsgModal("Ocorreu um erro:", jsonResponse.message);
+          setTimeout(window.location.reload(), 5000)
         } else {
-          // Exibir mensagem de erro genérica
-          alert("Ocorreu um erro: " + xhr.responseText);
+          openMsgModal("Venda cancelada", "Venda cancelada com sucesso!");
+          setTimeout(window.location.reload(), 5000)
+          // A resposta não é um JSON válido, exibir mensagem genérica
         }
+      } else {
+        // Exibir mensagem de erro genérica
+        openMsgModal("Ocorreu um erro:", "Ocorreu um erro ao cancelar a venda");
       }
-    };
-    xhr.send();
-  } else {
-    alert("Operação cancelada.");
-  }
+    }
+  };
+  xhr.send();
+}
+
+function openMsgModal(title, msg) {
+  $("#msgModalLabel").text(title);
+  $("#msgRetorno").text(msg);
+  $("#msgModal").modal("show");
 }

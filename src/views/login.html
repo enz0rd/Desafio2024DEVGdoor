@@ -4,32 +4,57 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login - PDV Simples</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
     <link rel="icon" href="../src/assets/favicon.ico" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="../src/css/navbar.css" />
+    <link rel="stylesheet" href="../src/css/inicio.css" />
+    <link rel="icon" href="../src/assets/favicon.ico" />
     <link rel="stylesheet" href="../src/css/login.css">
 </head>
   <body>
-    <form id="login-form" method="post" action="/entrar">
-        <!-- Email input -->
-        <div class="form-outline mb-4">
-            <h1 class="login-title">Login</h1>
-        </div>
-
-        <div class="form-outline mb-4">
-            <label class="form-label" for="user">Usuário</label>
-          <input type="text" id="user" class="form-control login-field" />
-        </div>
-      
-        <!-- Password input -->
-        <div class="form-outline mb-4">
-            <label class="form-label" for="password">Senha</label>
-          <input type="password" id="password" class="form-control login-field" />
-        </div>
-      
-        <button type="submit" class="btn btn-primary btn-block mb-4">Entrar</button>
-        </div>
-    </form>
+    <div class="title-container">
+      <h1 class="title-logo">PDV Desafio</h1>
+    </div>
+    <main class="main-login">
+      <form id="login-form" method="post" action="/entrar">
+          <div class="login-form">
+            <div class="form-outline mb-4">
+              <h1 class="login-title">Login</h1>
+            </div>
+            <div class="form-outline mb-4">
+              <label class="form-label" for="user">Usuário</label>
+              <input type="text" id="user" class="form-control login-field" />
+            </div>
+            <div class="form-outline mb-4">
+              <label class="form-label" for="password">Senha</label>
+              <input type="password" id="password" class="form-control login-field" />
+            </div>
+            <button type="submit" class="btn btn-primary btn-block mb-4">Entrar</button>
+          </div>
+        </div>  
+      </form>
+    </main>
+    <div class="content">
+      <div class="texto-inicio">
+        <h1>Bem vindo ao meu PDV!</h1>
+        <p>Para acessar o sistema, faça login com os dados abaixo</p>
+        <p>Usuário: <code>admin</code></p>
+        <p>Senha: <code>123</code></p>
+      </div>
+    </div>
+    <div class="barra-fim fixed-bottom" style="z-index: 2">
+      <span class="meu-nome">Enzo Rossi Daltoé - 2024</span>
+    </div>
     <script src="../src/js/login.js"></script>
   </body>
 </html>
