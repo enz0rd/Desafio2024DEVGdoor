@@ -51,3 +51,7 @@
     margin-top: 2rem;
     margin-trim: auto;
 }
+
+#msgModal {
+    box-shadow: #6b6b6b44 0px 0px 10px 0px;
+}

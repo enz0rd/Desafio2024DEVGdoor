@@ -40,7 +40,7 @@ document
               var jsonResponse = JSON.parse(xhr.responseText);
               if (jsonResponse.message) {
                 // Exibir mensagem de erro
-                alert(jsonResponse.message);
+                openMsgModal("Alerta:", jsonResponse.message);
               }
             } else {
               window.location.href = "/home";
@@ -48,7 +48,7 @@ document
             }
           } else {
             // Exibir mensagem de erro genérica
-            alert("Ocorreu um erro.");
+            openMsgModal("Ocorreu um erro", "Ocorreu um erro ao fazer login. Tente novamente.");
           }
         }
       };
@@ -56,6 +56,14 @@ document
     } else {
       var user = form.querySelector("input[type='text']").value;
       var password = form.querySelector("input[type='password']").value;
-      alert("Preencha os campos!");
+      openMsgModal("Preencha os campos", "Preencha os campos de login!");
     }
   });
+
+  function openMsgModal(title, msg) {
+    $("#msgModalLabel").text(title);
+    $("#msgRetorno").text(msg);
+    $('#msgModal').css('z-index', 9999);
+    $("#msgModal").modal("show");
+  }
+  
