@@ -19,9 +19,11 @@ $(document).ready(function () {
         const termo = $(this).val().trim();
 
         // Verifique primeiro o padrão: quantidade*descrição
-        const regexDescricao = /^(\d+)\*(.+)$/; // Para quantidade*descrição
-        const matchDescricao = termo.match(regexDescricao);
+        const descricaoLimpa = termo.replace(',', '.');
+        const regexDescricao = /(\d+(?:[\.,]\d+)?)\*(.+)/g; // Para quantidade*descrição
+        const matchDescricao = descricaoLimpa.match(regexDescricao);
 
+        
         if (matchDescricao) {
           const qtd = parseFloat(matchDescricao[1]);
           const descricao = matchDescricao[2];
@@ -58,11 +60,10 @@ $(document).ready(function () {
           $("#quantidade").val(qtd);
         } else {
           // Verifique o padrão: quantidade*codigodoproduto
-          const regex = /^(\d+)\*(\w+)$/; // Para quantidade*codigodoproduto
+          const regexCodigoProduto = /^(\d+(?:[\.,]\d+)?)\*(\w+)\*(\w+)$/; // Para quantidade*codigodoproduto
           const match = termo.match(regex);
 
           if (match) {
-            console.log("testando codigo");
             const qtd = parseFloat(match[1]);
             const codigo = match[2];
 
