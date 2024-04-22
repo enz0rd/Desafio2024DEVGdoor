@@ -436,6 +436,7 @@ function finalizar() {
               setTimeout(window.location.href = "/pdv", 5000)
             }
           } else {
+            openMsgModal("Venda Finalizada", "Venda realizada com sucesso!");
             setTimeout(window.location.href = "/pdv", 5000)
             // A resposta não é um JSON válido, exibir mensagem genérica
           }

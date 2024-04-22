@@ -49,16 +49,16 @@ document
               var jsonResponse = JSON.parse(xhr.responseText);
               if (jsonResponse.codigo == 400) {
                 // Exibir mensagem de erro
-                alert(jsonResponse.message);
+                openMsgModal("Ocorreu um erro:", jsonResponse.message);
               }
             } else {
-              alert("Usuário atualizado!");
+              openMsgModal("Usuário atualizado", "Usuário atualizado com sucesso!");
               window.location.href = "/usuarios";
               // A resposta não é um JSON válido, exibir mensagem genérica
             }
           } else {
             // Exibir mensagem de erro genérica
-            alert("Ocorreu um erro.");
+            openMsgModal("Ocorreu um erro", "Erro ao atualizar usuário, tente novamente mais tarde!");
           }
         }
       };
@@ -66,6 +66,13 @@ document
     } else {
       var user = form.querySelector("input[type='text']").value;
       var password = form.querySelector("input[type='password']").value;
-      alert("Nenhum campo pode ficar vazio!");
+      openMsgModal("Preencha todos os campos:", "Nenhum campo pode ficar vazio!");
     }
   });
+
+  function openMsgModal(title, msg) {
+    $("#msgModalLabel").text(title);
+    $("#msgRetorno").text(msg);
+    $('#msgModal').css('z-index', 9999);
+    $("#msgModal").modal("show");
+  }
