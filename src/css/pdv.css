@@ -53,5 +53,11 @@
 }
 
 #msgModal {
-    box-shadow: #6b6b6b44 0px 0px 10px 0px;
+    justify-content: end;
+    z-index: 9999;
+}
+
+#msgModal .modal-dialog {
+    align-items: center;
+    box-shadow: #00000044 0px 0px 10px 10px;
 }

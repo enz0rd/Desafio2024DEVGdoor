@@ -15,6 +15,7 @@
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="../src/css/navbar.css" />
     <link rel="stylesheet" href="../src/css/inicio.css" />
     <link rel="stylesheet" href="../src/css/cadastro.css" />
@@ -111,11 +112,47 @@
         <button type="button"
         <% if(data.ativo !== true) { %> disabled=true <% } else { %> <% } %> 
         id="excluir" 
-        onclick="ExcluirProduto()" 
+        onclick="showPopupExcluir()" 
         class="btn btn-outline-danger">
           Excluir
         </button>
       </form>
+      <!-- popup choice -->
+    <div class="modal fade z-3" id="choiceModal" tabindex="-1" aria-labelledby="choiceModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="choiceModalLabel">Exclusão de Produto</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p id="choiceMsg" class="form-control">Tem certeza que deseja excluir esse produto?</p>
+            <small>Se houverem movimentações registradas, esse produto será apenas inativado.</small>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" id="confirmar" data-bs-dismiss="modal">Excluir</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Voltar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+       <!-- popup mensagem -->
+    <div class="modal fade" id="msgModal" tabindex="-1" aria-labelledby="msgModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="msgModalLabel"></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p id="msgRetorno" class="form-control"></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ok</button>
+          </div>
+        </div>
+      </div>
+    </div>
     </div>
     <div class="barra-fim fixed-bottom" style="z-index: 2">
       <span class="meu-nome">Enzo Rossi Daltoé - 2024</span>

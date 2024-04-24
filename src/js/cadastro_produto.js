@@ -46,20 +46,28 @@ document
               var jsonResponse = JSON.parse(xhr.responseText);
               if (jsonResponse.codigo == 400) {
                 // Exibir mensagem de erro
-                alert(jsonResponse.message);
+                openMsgModal("Ocorreu um erro:", jsonResponse.message);
               }
             } else {
-              window.location.href = "/produtos";
+              openMsgModal("Produto cadastrado", "Produto cadastrado com sucesso!");
+              setTimeout(function () {window.location.href = "/produtos";}, 2000);
               // A resposta não é um JSON válido, exibir mensagem genérica
             }
           } else {
             // Exibir mensagem de erro genérica
-            alert("Ocorreu um erro.");
+            openMsgModal("Ocorreu um erro:", "Ocorreu um erro ao cadastrar o produto. Tente novamente.");
           }
         }
       };
       xhr.send(JSON.stringify(data));
     } else {
-      alert("Os campos descrição, valor de custo, valor de venda e quantidade não podem estar em branco!");
+      openMsgModal("Preencha os campos obrigatórios:","Os campos descrição, valor de custo, valor de venda e quantidade não podem estar em branco!");
     }
   });
+
+  function openMsgModal(title, msg) {
+    $("#msgModalLabel").text(title);
+    $("#msgRetorno").text(msg);
+    $('#msgModal').css('z-index', 9999);
+    $("#msgModal").modal("show");
+  }

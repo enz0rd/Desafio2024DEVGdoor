@@ -10,6 +10,7 @@ form {
 }
 
 .login-form {
+  margin-top: 4rem;
   background-color: white;
   padding: 2rem;
   border: 1px solid #c7c7c7;
@@ -74,4 +75,5 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 5rem;
 }

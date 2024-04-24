@@ -43,7 +43,8 @@ document
                 openMsgModal("Alerta:", jsonResponse.message);
               }
             } else {
-              window.location.href = "/home";
+              openMsgModal("Login efetuado", "Seja bem vindo ao PDV!");
+              setTimeout(function () {window.location.href = "/home"}, 2000);
               // A resposta não é um JSON válido, exibir mensagem genérica
             }
           } else {

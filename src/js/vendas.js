@@ -83,10 +83,10 @@ function CancelarVenda(id) {
           // A resposta é JSON válido
           var jsonResponse = JSON.parse(xhr.responseText);
           openMsgModal("Ocorreu um erro:", jsonResponse.message);
-          setTimeout(window.location.reload(), 5000)
+          setTimeout(function () {window.location.reload()}, 2000);
         } else {
           openMsgModal("Venda cancelada", "Venda cancelada com sucesso!");
-          setTimeout(window.location.reload(), 5000)
+          setTimeout(function () {window.location.reload()}, 2000);
           // A resposta não é um JSON válido, exibir mensagem genérica
         }
       } else {

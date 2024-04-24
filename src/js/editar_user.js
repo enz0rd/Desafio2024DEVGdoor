@@ -53,7 +53,7 @@ document
               }
             } else {
               openMsgModal("Usuário atualizado", "Usuário atualizado com sucesso!");
-              window.location.href = "/usuarios";
+              setTimeout(function () {window.location.href = "/usuarios";}, 2000);
               // A resposta não é um JSON válido, exibir mensagem genérica
             }
           } else {

@@ -14,8 +14,9 @@
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="../src/css/navbar.css" />
-    <link rel="stylesheet" href="../src/css/inicio.css">
+    <link rel="stylesheet" href="../src/css/inicio.css" />
     <link rel="stylesheet" href="../src/css/cadastro.css" />
     <script src="../src/js/cadastro_produto.js" defer></script>
     <title>Cadastrar Produto - PDV Simples</title>
@@ -50,38 +51,112 @@
         <div class="form-row mb-3 d-flex justify-content-between flex-wrap">
           <div class="form-group col-md-2 m-1">
             <label for="codigo">Código</label>
-            <input type="text" class="form-control" id="codigo" placeholder="NOVO" disabled>
+            <input
+              type="text"
+              class="form-control"
+              id="codigo"
+              placeholder="NOVO"
+              disabled
+            />
           </div>
           <div class="form-group col-md-4 m-1">
             <label for="barras">Barras</label>
-            <input type="text" class="form-control" id="barras" maxlength="13" placeholder="EAN13">
+            <input
+              type="text"
+              class="form-control"
+              id="barras"
+              maxlength="13"
+              placeholder="EAN13"
+            />
           </div>
         </div>
         <div class="form-group m-1">
-          <label for="descricao">Descrição</label>
-          <input type="text" class="form-control" id="descricao" placeholder="Nome do produto">
+          <label for="descricao">Descrição <small>*</small></label>
+          <input
+            type="text"
+            class="form-control"
+            id="descricao"
+            placeholder="Nome do produto"
+          />
         </div>
         <div class="form-row d-flex justify-content-between flex-wrap">
           <div class="form-group col-md-3 m-1">
-            <label for="qtd">Quantidade</label>
-            <input type="number" step="any" class="form-control" id="qtd" placeholder="0,00">
+            <label for="qtd">Quantidade <small>*</small></label>
+            <input
+              type="number"
+              step="any"
+              class="form-control"
+              id="qtd"
+              placeholder="0,00"
+            />
           </div>
           <div class="form-group col-md-3 m-1">
-            <label for="valor_custo">Preço de custo</label>
-            <input type="number" step="any" class="form-control" id="valorcusto" placeholder="R$0,00">
+            <label for="valor_custo">Preço de custo <small>*</small></label>
+            <input
+              type="number"
+              step="any"
+              class="form-control"
+              id="valorcusto"
+              placeholder="R$0,00"
+            />
           </div>
           <div class="form-group col-md-3 m-1">
-            <label for="valor_venda">Preço de Venda</label>
-            <input type="number" step="any" class="form-control" id="valorvenda" placeholder="R$0,00">
+            <label for="valor_venda">Preço de Venda <small>*</small></label>
+            <input
+              type="number"
+              step="any"
+              class="form-control"
+              id="valorvenda"
+              placeholder="R$0,00"
+            />
           </div>
         </div>
         <div class="form-group m-1">
           <label for="observacoes">Observações</label>
-          <textarea type="text" class="form-control" id="observacoes" placeholder="Observações do produtos" ></textarea>
+          <textarea
+            type="text"
+            class="form-control"
+            id="observacoes"
+            placeholder="Observações do produtos"
+          ></textarea>
         </div>
         <br />
         <button type="submit" class="btn btn-primary">Cadastrar</button>
       </form>
+      <!-- popup mensagem -->
+      <div
+        class="modal fade"
+        id="msgModal"
+        tabindex="-1"
+        aria-labelledby="msgModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="msgModalLabel"></h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <p id="msgRetorno" class="form-control"></p>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Ok
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="barra-fim fixed-bottom" style="z-index: 2">
       <span class="meu-nome">Enzo Rossi Daltoé - 2024</span>

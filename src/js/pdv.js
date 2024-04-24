@@ -433,12 +433,12 @@ function finalizar() {
               openMsgModal("Erro:", jsonResponse.message);
             } else if (jsonResponse.codigo == 200) {
               openMsgModal("Venda Finalizada", "Venda realizada com sucesso!");
-              setTimeout(window.location.href = "/pdv", 5000)
+              setTimeout(function () {window.location.href = "/pdv";}, 2000);
             }
           } else {
-            openMsgModal("Venda Finalizada", "Venda realizada com sucesso!");
-            setTimeout(window.location.href = "/pdv", 5000)
             // A resposta não é um JSON válido, exibir mensagem genérica
+            openMsgModal("Venda Finalizada", "Venda realizada com sucesso!");
+            setTimeout(function () {window.location.href = "/pdv";}, 2000);
           }
         } else {
           // Exibir mensagem de erro genérica
