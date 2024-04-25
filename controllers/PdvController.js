@@ -236,6 +236,15 @@ class PdvController {
         var venda = await db.VENDAS.findOne({
           where: { id: id }
         });
+        if(venda == null) {
+          var data = [{
+            title: 'Venda não encontrada', 
+            message: `Essa venda não existe, tente novamente com outra venda!`
+          }]
+          res.render('../src/views/errorpage',{data: data});
+          return;
+        }
+
         var itens = await db.ITEVENDAS.findAll({
           where: { codigo_venda: id },
           include: [{
@@ -263,7 +272,11 @@ class PdvController {
         console.log(jsonParse)
         res.render('../src/views/visualizar_venda', {data: data});
       } catch(err) {
-        res.status(400).json({message: `Ocorreu um erro: ${err.message}`});
+        var data = [{
+          title: 'Erro', 
+          message: `Ocorreu um erro: ${err.message}`
+        }]
+        res.render('../src/views/errorpage',{data: data});
       }
     } else {
       var error = [

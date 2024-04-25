@@ -25,10 +25,10 @@ app.listen(port, () => {
       var error = [
         {
           title: "404 not found",
-          message: "Essa página não existe, retornando ao login",
+          message: "Essa página não existe, retornando...",
         },
       ];
-      res.render("../src/views/not_auth", { data: error });
+      res.render("../src/views/errorpage", { data: error });
     }
   });
   app.use(cookieParser("c2VjcmV0ZW1haWxrZXl0b2Vuc3VyZXNlY3VyaXR5"));

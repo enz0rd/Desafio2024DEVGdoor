@@ -36,17 +36,18 @@ class UsuarioController {
           id: req.params.id,
         },
       });
-      const jsonString = JSON.stringify(fetch);
-      const jsonParse = JSON.parse(jsonString);
-      if (jsonParse.length == 0 || jsonParse == null) {
+      if (fetch == null) {
         var error = [
           {
-            title: "Erro",
-            message: "Usuário não disponível, retornando ao login",
+            title: "Erro ao listar usuário",
+            message: "Usuário não disponível, tente listar um usuário que esteja cadastrado!",
           },
         ];
-        res.render("../src/views/not_auth", { data: error });
+        res.render("../src/views/errorpage", { data: error });
+        return;
       }
+      const jsonString = JSON.stringify(fetch);
+      const jsonParse = JSON.parse(jsonString);
 
       const sessionId = req.cookies.sessionId;
       if(jsonParse.nome.toUpperCase() == atob(sessionId).toUpperCase()) {

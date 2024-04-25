@@ -44,17 +44,18 @@ class ProdutoController {
           id: req.params.id,
         },
       });
-      const jsonString = JSON.stringify(fetch);
-      const jsonParse = JSON.parse(jsonString);
-      if (jsonParse.length == 0 || jsonParse == null) {
+      if (fetch == null) {
         var error = [
           {
-            title: "Erro",
-            message: "Produto não disponível, retornando ao login",
+            title: "Erro ao listar produto",
+            message: "Produto não disponível, tente listar um que esteja cadastrado!",
           },
         ];
-        res.render("../src/views/not_auth", { data: error });
+        res.render("../src/views/errorpage", { data: error });
+        return;
       }
+      const jsonString = JSON.stringify(fetch);
+      const jsonParse = JSON.parse(jsonString);
       console.log(jsonParse)
       res.render("../src/views/cad_produto", { data: jsonParse });
     } else {
