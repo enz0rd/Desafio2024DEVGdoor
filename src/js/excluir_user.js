@@ -12,7 +12,6 @@ function Redirecionar() {
 }
 
 function ExcluirUser() {
-  console.log(idUser);
   var form = document.getElementById("cadastro-user");
   var user = form.querySelector("input[type='text']").value;
   var checkAtivo = form.querySelector("input[type='checkbox']");

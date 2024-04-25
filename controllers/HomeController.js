@@ -32,7 +32,7 @@ class HomeController {
           const expirationTime = Date.now() + maxAge;
           res.cookie("sessionId", sessionId, { value: true, maxAge: 3600000 });
           res.cookie("expirationTime", expirationTime, { maxAge });
-          console.log(`Redirecting`);
+          // `Redirecting`
           res.redirect("/home");
         } catch (error) {
           console.log(`Erro ao listar: ${error.message}`);

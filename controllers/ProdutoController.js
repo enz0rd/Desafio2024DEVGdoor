@@ -56,7 +56,6 @@ class ProdutoController {
       }
       const jsonString = JSON.stringify(fetch);
       const jsonParse = JSON.parse(jsonString);
-      console.log(jsonParse)
       res.render("../src/views/cad_produto", { data: jsonParse });
     } else {
       var error = [
@@ -100,7 +99,6 @@ class ProdutoController {
     var check = await checkCookies(req, res);
     if (check) {
       try {
-        console.log(req.body)
         const resp = await db.PRODUTOS.findOne({
           where: {
             id: req.body.id,
@@ -141,14 +139,12 @@ class ProdutoController {
             id: req.body.id,
           },
         });
-        console.log(resp)
         const itevendas = await db.ITEVENDAS.findAll({
           where: {
             codigo_produto: req.body.id,
           },
         });
 
-        console.log(itevendas.length);
         if (itevendas.length == 0) {
           await resp.destroy();
         } else {
@@ -159,7 +155,6 @@ class ProdutoController {
         }
         res.status(200).json({ message: `Produto excluído com sucesso.` });
       } catch (err) {
-        console.log(err.message)
         res.status(400).json({ message: `Ocorreu um erro: ${err.message}` });
       }
     } else {

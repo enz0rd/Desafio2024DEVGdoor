@@ -35,7 +35,6 @@ document
         observacoes: observacoes,
         ativo: ativo
       };
-      console.log(data)
 
       var xhr = new XMLHttpRequest();
       xhr.open("POST", form.action, true);

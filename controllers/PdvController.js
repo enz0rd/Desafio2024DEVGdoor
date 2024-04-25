@@ -269,7 +269,6 @@ class PdvController {
         }
         const jsonString = JSON.stringify(data);
         const jsonParse = JSON.parse(jsonString);
-        console.log(jsonParse)
         res.render('../src/views/visualizar_venda', {data: data});
       } catch(err) {
         var data = [{

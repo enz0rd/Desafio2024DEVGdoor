@@ -230,7 +230,6 @@ function openModal(codigo, descricao, preco, qtd, qtdSelecionada) {
 totalVenda = 0;
 
 function lançar() {
-  console.log($("#quantidade").val())
   if (
     parseFloat($("#quantidade").val()) >
       parseFloat(
@@ -380,10 +379,8 @@ function telaPagamentos(element) {
 
 function finalizar() {
   if (parseFloat($("#faltaPagar").text()) > 0) {
-    console.log("Falta pagar o valor total da venda.")
     openMsgModal("Informe os pagamentos", "Falta pagar o valor total da venda.");
   } else {
-    console.log("Finalizando venda...");
     const produtos = [];
     $("#vendaTable tr").each(function () {
       const codigo = parseInt($(this).find("td:first").text());
@@ -414,8 +411,6 @@ function finalizar() {
       pagamentos,
       valores,
     };
-  
-    console.log(infoVenda);
   
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "/pdv/realizar-venda", true);

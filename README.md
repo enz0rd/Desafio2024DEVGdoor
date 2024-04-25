@@ -8,7 +8,7 @@ Bem vindo ao
 Leia a [Documentação](Documentação.md) para mais informações acerca das tecnologias e funcionamento
 
 
-Para começarmos, tenha o XAMPP e o Node instalado. Abra o XAMPP e inicie os serviços de MySQL e Apache. Depois:
+Para começarmos, tenha o [XAMPP](https://www.apachefriends.org/pt_br/download.html) e o [Node](https://nodejs.org/en/download) instalado. Abra o XAMPP e inicie os serviços de MySQL e Apache. Depois:
 
 - `npm run iniciar`
 

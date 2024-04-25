@@ -55,7 +55,6 @@ class UsuarioController {
       } else {
         jsonParse['currentUser'] = false;
       }
-      console.log(jsonParse)
       res.render("../src/views/cad_usuario", { data: jsonParse });
     } else {
       var error = [
@@ -131,7 +130,6 @@ class UsuarioController {
           },
         });
 
-        console.log(vendas.length);
         if (vendas == []) {
           await resp.destroy();
         } else {

@@ -5,7 +5,7 @@ async function checkCookies(req, res) {
     const sessionId = req.cookies.sessionId;
     const maxAge = req.cookies.expirationTime;
     if (sessionId == null || maxAge == null) {
-      console.log(`Não autorizado`);
+      // `Não autorizado`
       return false;
     } else {
       var result = await db.USUARIOS.findOne({
@@ -14,14 +14,14 @@ async function checkCookies(req, res) {
       try {
         if (result) {
           if (maxAge < Date.now()) {
-            console.log(`Não autorizado`);
+            // `Não autorizado`
             return false;
           } else {
-            console.log(`${sessionId} Autorizado`);
+            // `${sessionId} Autorizado`
             return true;
           }
         } else {
-          console.log(`Não autorizado`);
+          // `Não autorizado`
           return false;
         }
       } catch (error) {
