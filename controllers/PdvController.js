@@ -1,7 +1,7 @@
 const db = require("../models");
 const path = require("path");
 const checkCookies = require("./Auth.js");
-const { where } = require("sequelize");
+const { where, Op } = require("sequelize");
 const calcularData = require("../utils/Date.js");
 const moment = require("moment");
 
@@ -16,6 +16,7 @@ class PdvController {
             id: {
               [db.Sequelize.Op.like]: `%${query}%`,
             },
+            qtd: {[db.Sequelize.Op.gt]: 0}, // Verifica se o produto está disponível
             ativo: 1,
           },
           limit: 5,
@@ -26,6 +27,7 @@ class PdvController {
             barras: {
               [db.Sequelize.Op.like]: `%${query}%`,
             },
+            qtd: {[db.Sequelize.Op.gt]: 0}, // Verifica se o produto está disponível
             ativo: 1,
           },
           limit: 5,
@@ -36,6 +38,7 @@ class PdvController {
             descricao: {
               [db.Sequelize.Op.like]: `%${query}%`,
             },
+            qtd: {[db.Sequelize.Op.gt]: 0}, // Verifica se o produto está disponível
             ativo: 1,
           },
           limit: 5,
@@ -154,15 +157,26 @@ class PdvController {
             attributes: ['NUMERO', 'DATA_EMISSAO', 'STATUS', 'valor_tot', 'id_operador', 'cancelada'],
           }
         );
+
+        var sum = await db.VENDAS.sum('valor_tot', {
+          where: { cancelada: 0 }
+        })
+        const sumJson = JSON.stringify(sum);
+        const sumParse = JSON.parse(sumJson);
         const jsonString = JSON.stringify(resp);
         const jsonParse = JSON.parse(jsonString);
 
-        for(let i=0; i < jsonParse.length; i++) {
+        jsonParse.push({total: sumParse});
+        console.log(jsonParse)
+
+        for(let i=0; i < jsonParse.length-1; i++) {
           var nomeOperador = await db.USUARIOS.findOne({
             where: { id: jsonParse[i].id_operador },
           })
           jsonParse[i].nomeOperador = nomeOperador.dataValues.nome;
         }
+
+
         res.render("../src/views/vendas", {data: jsonParse});
       } catch(err) {
         res.send({codigo: 400, message: `Ocorreu um erro: ${err.message}`});

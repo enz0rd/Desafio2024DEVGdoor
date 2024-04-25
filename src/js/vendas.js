@@ -26,6 +26,12 @@ $(document).ready(function () {
     order: [[0, "desc"]],
   });
 
+  if (somaVendas.total == null) {
+    $("#somaVendas").text("R$ 0,00");
+  } else {
+    $("#somaVendas").text("R$" + somaVendas.total.toFixed(2));
+  }
+
   vendas.forEach(function (venda) {
     var valorVenda = venda.valor_tot ? "R$" + venda.valor_tot.toFixed(2) : "";
 
@@ -83,10 +89,14 @@ function CancelarVenda(id) {
           // A resposta é JSON válido
           var jsonResponse = JSON.parse(xhr.responseText);
           openMsgModal("Ocorreu um erro:", jsonResponse.message);
-          setTimeout(function () {window.location.reload()}, 2000);
+          setTimeout(function () {
+            window.location.reload();
+          }, 2000);
         } else {
           openMsgModal("Venda cancelada", "Venda cancelada com sucesso!");
-          setTimeout(function () {window.location.reload()}, 2000);
+          setTimeout(function () {
+            window.location.reload();
+          }, 2000);
           // A resposta não é um JSON válido, exibir mensagem genérica
         }
       } else {

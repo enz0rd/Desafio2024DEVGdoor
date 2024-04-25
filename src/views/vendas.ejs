@@ -57,6 +57,7 @@
     <div class="container" style="margin: auto">
       <div class="barracima">
         <h1 class="form-title">Vendas</h1>
+        <p>Faturamento atual: <code id="somaVendas"></code></p>
       </div>
       <div class="scrollable-table">
         <table id="tab_vendas" class="table table-hover table-bordered results">
@@ -118,6 +119,7 @@
       <span class="meu-nome">Enzo Rossi Daltoé - 2024</span>
     </div>
     <script>
+      var somaVendas = <%- JSON.stringify(data.pop()) %>;
       var vendas = <%- JSON.stringify(data) %>;
     </script>
     <script src="../src/js/vendas.js"></script>
